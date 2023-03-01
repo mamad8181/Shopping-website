@@ -1,7 +1,7 @@
 import { TextField } from "@/components"
 
 interface myProps{
-    quantity: number,
+    quantity: unknown,
     getterQuantity: () => number
 }
 

@@ -2,22 +2,24 @@
 import React from 'react'
 
 interface myProps{
-  type: string
   className: string,
+  type? : string
   placeholder? : string,
   label? : string,
-  onChange? : () => string,
+  onChange? : () => void | string,
   value? : string | number,
   htmlFor? : string,
-  error? : string
+  error? : any,
+  validation? : any,
+  ref? : any
 }
 
-export const TextField = ({ label, onChange, value, placeholder, className, htmlFor, error }: myProps) => {
+export const TextField = ({ label, onChange, ref, value, placeholder, className, htmlFor, error, validation }: myProps) => {
 
   return (
     <div>
         <label htmlFor={htmlFor}>{label}</label>
-        <input onChange={onChange} value={value} id={htmlFor} placeholder={placeholder} className={className} />
+        <input onChange={onChange} ref={ref} value={value} id={htmlFor} placeholder={placeholder} className={className} {...validation} />
         {error && <p className="mt-2 text-sm text-red-500 dark:text-red-400">
             {error}
         </p>}
