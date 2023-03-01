@@ -1,9 +1,10 @@
 // import { getProducts } from 'api'
-import { useEffect, useState } from 'react'
-import poster from '../../assets/images/lki_hp_header_dt.jpg'
-
+// import { useEffect, useState } from 'react'
+import Image from 'next/image'
+// import poster from '../../assets/images/lki_hp_header_dt.jpg'
+// https://www.maccosmetics.ca/media/export/cms/collections/locked_kiss_ink/lki_hp_header_dt.jpg
 export const HomeScreen = () => {
-  const [products, setProducts] = useState([])
+  // const [products, setProducts] = useState([])
 
   // useEffect(() => {
   //   const productsGetter = async () => {
@@ -15,7 +16,7 @@ export const HomeScreen = () => {
 
   return (
     <div>
-        <img src={poster}/>
+        <img src={'https://www.maccosmetics.ca/media/export/cms/collections/locked_kiss_ink/lki_hp_header_dt.jpg'} />
     </div>
   )
 }

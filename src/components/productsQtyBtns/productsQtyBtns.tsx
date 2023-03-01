@@ -1,8 +1,8 @@
-import { TextField } from "@/components"
+import { TextField } from "../index"
 
 interface myProps{
-    quantity: unknown,
-    getterQuantity: () => number
+    quantity: number,
+    getterQuantity: (number: number) => void
 }
 
 export const ProductsQtyBtns = ({ quantity, getterQuantity }: myProps) => {

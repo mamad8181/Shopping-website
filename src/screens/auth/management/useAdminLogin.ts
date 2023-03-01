@@ -4,15 +4,12 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
-import { adminLogin } from '@/api'
-import { useNavigate } from 'react-router'
+import { adminLogin } from '../../../api'
+import { useRouter } from 'next/router'
 
-interface person{
-  data: {
-    username: string | number,
-    password: string | number
-  }
-}
+// interface person{
+//   data: any
+// }
 
 const adminLoginSchema = yup
   .object({
@@ -22,20 +19,21 @@ const adminLoginSchema = yup
   .required()
 
 export const useAdminLogin = () => {
-  const navigate = useNavigate()
+  const router = useRouter()
 
   const [loading, setLoading] = useState(false)
 
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(adminLoginSchema),
     mode: 'onChange'
   })
 
-  const adminLoginFormHandler = async (data: person) => {
+  const adminLoginFormHandler = async (data: {username: string, password: string | number}) => {
     setLoading(true)
     try {
       const response = await adminLogin(data)
@@ -47,7 +45,7 @@ export const useAdminLogin = () => {
         'refreshToken', response.data.refreshToken
       )
       setLoading(false)
-      navigate('/management/store')
+      router.push('/management')
     } catch (error: any) {
       setLoading(false)
       if (error.response?.data?.message) return error.response.data.message
@@ -55,5 +53,5 @@ export const useAdminLogin = () => {
     }
   }
 
-  return { handleSubmit, adminLoginFormHandler, register, errors, loading }
+  return { handleSubmit, adminLoginFormHandler, getValues, register, errors, loading }
 }

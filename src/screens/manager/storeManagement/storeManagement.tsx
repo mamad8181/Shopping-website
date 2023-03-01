@@ -1,5 +1,5 @@
-import { IMAGES_BASE_URL, uploadImg } from 'api'
-import { HeaderLabel, TextField } from 'components'
+import { IMAGES_BASE_URL, uploadImg } from '@/api'
+import { HeaderLabel, TextField } from '../../../components'
 
 export const StoreManagement = () => {
   // const config = {
