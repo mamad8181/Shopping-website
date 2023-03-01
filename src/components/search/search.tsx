@@ -2,7 +2,7 @@ import { TextField } from "@/components"
 
 interface myProps{
   className: string,
-  onChange: () => string,
+  onChange? : () => string,
 }
 
 export const Search = ({ className, onChange }: myProps) => {
