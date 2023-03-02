@@ -1,8 +1,6 @@
 import { getProducts, IMAGES_BASE_URL } from '@/api'
-import { Button, ProductsQtyBtns, Search, TextField } from '@/components'
+import { Button, ProductsQtyBtns } from '@/components'
 import { useEffect, useRef, useState } from 'react'
-
-import classes from './productsManagement.module.css'
 
 type dataObj= Record<string, unknown>
 
@@ -26,7 +24,6 @@ export const ProductsManagement = () => {
   }
 
   const filtering = () => {
-    // console.log(e)
     const searchTemp: dataObj[] = []
     if (selectElement.current!.value !== 'all') {
       products.map((product) => selectElement.current!.value === product.subcategory && filterTemp.push(product))
@@ -49,7 +46,7 @@ export const ProductsManagement = () => {
   return (
     <div className='p-10 pt-16 relative' >
           <b className='text-2xl m-10' >جدول مدیریت محصولات:</b>
-          <div className={`${classes.selection} absolute w-44 border-b-2 border-gray-200`} >
+          <div className={`absolute top-[124px] left-[605px] w-44 border-b-2 border-gray-200`} >
             <select id="underline_select" onChange={filtering} ref={selectElement} className="py-2.5 inline px-0 w-5/6 text-sm text-gray-500 bg-transparent border-0 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
                 <option value='all' selected>همه محصولات</option>
                 <option value='face'>محصولات صورت</option>
@@ -59,8 +56,8 @@ export const ProductsManagement = () => {
               <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2h-11z"/>
             </svg>
           </div>
-        <Button className={`${classes.add_btn} absolute bg-green-500 rounded-full py-1.5 px-5 text-white`} >افزودن کالا</Button>
-        <div className={`${classes.search} absolute bg-gray-100 w-36 p-2 pt-1 pb-2 rounded-full`}>
+        <Button className={`left-[330px] top-[130px] absolute bg-green-500 rounded-full py-1.5 px-5 text-white`} >افزودن کالا</Button>
+        <div className={`absolute top-[130px] left-[450px] bg-gray-100 w-36 p-2 pt-1 pb-2 rounded-full`}>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="absolute m-1.5 mr-1 bi bi-search" viewBox="0 0 16 16">
           <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
         </svg>

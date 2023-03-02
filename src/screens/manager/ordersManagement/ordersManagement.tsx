@@ -1,6 +1,4 @@
 
-import classes from './ordersManagement.module.css'
-
 export const OrderManagement = () => {
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -12,7 +10,7 @@ export const OrderManagement = () => {
                 <svg className="w-3 h-3 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
             </button>
             {/* <!-- Dropdown menu --> */}
-            <div id="dropdownRadio" className={`${classes.selection} z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`} data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top" >
+            <div id="dropdownRadio" className={`z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`} data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top" >
                 <ul className="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioButton">
                     <li>
                         <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">

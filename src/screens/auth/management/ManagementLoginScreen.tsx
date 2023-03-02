@@ -2,6 +2,8 @@
 import { Button, TextField } from '@/components'
 import { SubmitHandler } from 'react-hook-form/dist/types'
 import { useAdminLogin } from './useAdminLogin'
+import 'tailwindcss/tailwind.css'
+
 
 export const ManagementLoginScreen = () => {
   const { handleSubmit, adminLoginFormHandler, register, errors, loading } = useAdminLogin()
@@ -21,7 +23,7 @@ export const ManagementLoginScreen = () => {
               <TextField error={errors.username?.message} label='نام کاربری:' className='border-2 p-3 outline-none mb-0 block w-full' placeholder='*نام کاربری را وارد کنید' validation={{ ...register('username') }} />
             </div>
             <div className='mt-2' >
-              <TextField error={errors.password?.message} label='رمز عبور:' className='border-2 p-3 outline-none mb-0 block w-full' placeholder='*رمز عبور را وارد کنید' validation={{ ...register('password') }} />
+              <TextField type='password' error={errors.password?.message} label='رمز عبور:' className='border-2 p-3 outline-none mb-0 block w-full' placeholder='*رمز عبور را وارد کنید' validation={{ ...register('password') }} />
             </div>
             <a href='*' className='mb-1 mt-5 w-48 border-b-2 border-black block hover:text-gray-500' >رمز عبور را فراموش کرده اید؟</a>
             <a href='*' className='hover:text-gray-500 border-b-2 border-black'>تغییر نام کاربری</a>

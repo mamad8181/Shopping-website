@@ -7,7 +7,7 @@ interface myProps{
   placeholder? : string,
   label? : string,
   onChange? : () => void | string,
-  value? : string | number,
+  value? : any,
   htmlFor? : string,
   error? : any,
   validation? : any,

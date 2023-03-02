@@ -1,5 +1,4 @@
 import { TextField } from "../index"
-import 'tailwindcss/tailwind.css'
 
 
 
