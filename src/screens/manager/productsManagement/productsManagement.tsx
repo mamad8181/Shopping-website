@@ -45,7 +45,7 @@ export const ProductsManagement = () => {
 
   return (
     <div className='p-10 pt-16 relative' >
-          <b className='text-2xl m-10' >جدول مدیریت محصولات:</b>
+          <b className='text-2xl m-10' >جدول مدیریت محصولات</b>
           <div className={`absolute top-[124px] left-[605px] w-44 border-b-2 border-gray-200`} >
             <select id="underline_select" onChange={filtering} ref={selectElement} className="py-2.5 inline px-0 w-5/6 text-sm text-gray-500 bg-transparent border-0 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
                 <option value='all' selected>همه محصولات</option>
@@ -84,7 +84,7 @@ export const ProductsManagement = () => {
                     </th>
                 </tr>
             </thead>
-            <tbody className='' >
+            <tbody>
                 {(!productsArray ? products : productsArray).map((product: any) => {
                   return (
                         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={product.id} >

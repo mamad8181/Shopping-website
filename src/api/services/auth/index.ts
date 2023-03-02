@@ -8,6 +8,10 @@ export const getProducts = () => {
   return INSTANCE.get('/products')
 }
 
+export const getOrders = () => {
+  return INSTANCE.get('/orders')
+}
+
 export const uploadImg = (data: any, config: any) => {
   return INSTANCE.post('/upload', data, config)
 }
