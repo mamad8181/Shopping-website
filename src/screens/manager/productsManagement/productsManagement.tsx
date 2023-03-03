@@ -7,6 +7,7 @@ type dataObj= Record<string, unknown>
 export const ProductsManagement = () => {
   const selectElement = useRef<HTMLSelectElement>(null)
   const searchElement = useRef<HTMLInputElement>(null)
+  const filterElement = useRef<HTMLSelectElement>(null)
   const [products, setProducts] = useState<dataObj[]>([])
   const [productsArray, setProductsArray] = useState<dataObj[]>()
   const filterTemp: dataObj[] = []
@@ -24,20 +25,70 @@ export const ProductsManagement = () => {
   }
 
   const filtering = () => {
+    console.log(selectElement.current!.value)
     const searchTemp: dataObj[] = []
     if (selectElement.current!.value !== 'all') {
       products.map((product) => selectElement.current!.value === product.subcategory && filterTemp.push(product))
+      switch (filterElement.current!.value){
+        case 'high':
+          filterTemp.sort((a, b) => {
+            return +(b.price as number) - +(a.price as number)
+          })
+          break;
+        case 'low':
+          filterTemp.sort((a, b) => {
+            return +(a.price as number) - +(b.price as number)
+          })
+          break;
+        case 'qty-high':
+          filterTemp.sort((a, b) => {
+            return (b.quantity as number) - (a.quantity as number)
+          })
+          break;
+        case 'qty-low':
+          filterTemp.sort((a, b) => {
+            return (a.quantity as number) - (b.quantity as number)
+          })
+          break;
+        default:
+          break;
+      }
       if (searchElement.current?.value) {
         filterTemp.map((product) => `${product.category} ${product.brand}`.includes(searchElement.current!.value) && searchTemp.push(product))
       } else {
         filterTemp.map((product) => searchTemp.push(product))
       }
     } else {
+      products.map((product) => filterTemp.push(product))
+      switch (filterElement.current!.value){
+        case 'high':
+          filterTemp.sort((a, b) => {
+            return +(b.price as number) - +(a.price as number)
+          })
+          break;
+        case 'low':
+          filterTemp.sort((a, b) => {
+            return +(a.price as number) - +(b.price as number)
+          })
+          break;
+        case 'qty-high':
+          filterTemp.sort((a, b) => {
+            return (b.quantity as number) - (a.quantity as number)
+          })
+          break;
+        case 'qty-low':
+          filterTemp.sort((a, b) => {
+            return (a.quantity as number) - (b.quantity as number)
+          })
+          break;
+        default:
+          break;
+      }
       if (searchElement.current?.value) {
         console.log(searchElement.current.value)
-        products.map((product) => `${product.category} ${product.brand}`.includes(searchElement.current!.value) && searchTemp.push(product))
+        filterTemp.map((product) => `${product.category} ${product.brand}`.includes(searchElement.current!.value) && searchTemp.push(product))
       } else {
-        products.map((product) => searchTemp.push(product))
+        filterTemp.map((product) => searchTemp.push(product))
       }
     }
     setProductsArray([...searchTemp])
@@ -46,11 +97,18 @@ export const ProductsManagement = () => {
   return (
     <div className='p-10 pt-16 relative' >
           <b className='text-2xl m-10' >جدول مدیریت محصولات</b>
-          <div className={`absolute top-[124px] left-[605px] w-44 border-b-2 border-gray-200`} >
-            <select id="underline_select" onChange={filtering} ref={selectElement} className="py-2.5 inline px-0 w-5/6 text-sm text-gray-500 bg-transparent border-0 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                <option value='all' selected>همه محصولات</option>
-                <option value='face'>محصولات صورت</option>
-                <option value='eye'>محصولات چشم</option>
+          <select onChange={filtering} ref={selectElement} className="absolute left-[605px] top-[132px] inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+              <option value='all' selected>دسته بندی ها (همه)</option>
+              <option value='face'>محصولات صورت</option>
+              <option value='eye'>محصولات چشم</option>
+          </select>
+          <div className={`absolute top-[124px] left-[785px] w-[160px] border-b-2 border-gray-200`} >
+            <select onChange={filtering} ref={filterElement} className="py-2.5 inline px-0 w-[130px] text-sm text-gray-500 bg-transparent border-0 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                <option value='all' >فیلتر ها (همه)</option>
+                <option value='high' >گران ترین</option>
+                <option value='low' >ارزان ترین</option>
+                <option value='qty-high' >بیشترین تعداد</option>
+                <option value='qty-low' >کم ترین تعداد</option>
             </select>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="inline mr-2 bi bi-funnel" viewBox="0 0 16 16">
               <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2h-11z"/>
@@ -86,6 +144,7 @@ export const ProductsManagement = () => {
             </thead>
             <tbody>
                 {(!productsArray ? products : productsArray).map((product: any) => {
+                  const productPrice: number = +product.price
                   return (
                         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={product.id} >
                             <td className="w-32 p-4 text-center">
@@ -98,7 +157,7 @@ export const ProductsManagement = () => {
                                 <ProductsQtyBtns quantity={product.quantity} getterQuantity={getterQuantity} />
                             </td>
                             <td className="px-2 py-4 font-semibold text-gray-900 dark:text-white">
-                                {product.price} تومان
+                                {productPrice.toLocaleString()} تومان
                             </td>
                             <td className="px-6 py-8 flex gap-1.5">
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash3-fill text-red-700 cursor-pointer" viewBox="0 0 16 16">

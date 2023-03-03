@@ -10,6 +10,7 @@ export const OrderManagement = () => {
   const [orders, setOrders] = useState<dataObj[]>([])
   const selectElement = useRef<HTMLSelectElement>(null)
   const searchElement = useRef<HTMLInputElement>(null)
+  const filterElement = useRef<HTMLSelectElement>(null)
   const [ordersArray, setOrdersArray] = useState<dataObj[]>()
   const filterTemp: dataObj[] = []
 
@@ -27,17 +28,45 @@ export const OrderManagement = () => {
         const searchTemp: dataObj[] = []
         if (selectElement.current!.value !== 'all') {
           orders.map((order) => selectElement.current!.value === order.delivered && filterTemp.push(order))
+          switch (filterElement.current!.value){
+            case 'newer':
+              filterTemp.sort((a, b) => {
+                return (b.createdAt as number) - (a.createdAt as number)
+              })
+              break;
+            case 'older':
+              filterTemp.sort((a, b) => {
+                return (a.createdAt as number) - (b.createdAt as number)
+              })
+              break;
+            default:
+              break;
+          }
           if (searchElement.current?.value) {
             filterTemp.map((order) => `${order.username} ${order.lastname}`.includes(searchElement.current!.value) && searchTemp.push(order))
           } else {
             filterTemp.map((order) => searchTemp.push(order))
           }
         } else {
+            orders.map((order) => filterTemp.push(order))
+            switch (filterElement.current!.value){
+                case 'newer':
+                  filterTemp.sort((a, b) => {
+                    return (b.createdAt as number) - (a.createdAt as number)
+                  })
+                  break;
+                case 'older':
+                  filterTemp.sort((a, b) => {
+                    return (a.createdAt as number) - (b.createdAt as number)
+                  })
+                  break;
+                default:
+                  break;
+              }
           if (searchElement.current?.value) {
-            // console.log(searchElement.current.value)
-            orders.map((order) => `${order.username} ${order.lastname}`.includes(searchElement.current!.value) && searchTemp.push(order))
+            filterTemp.map((order) => `${order.username} ${order.lastname}`.includes(searchElement.current!.value) && searchTemp.push(order))
           } else {
-            orders.map((order) => searchTemp.push(order))
+            filterTemp.map((order) => searchTemp.push(order))
           }
         }
         setOrdersArray([...searchTemp])
@@ -54,7 +83,7 @@ export const OrderManagement = () => {
         </div>
             <select onChange={filtering} ref={selectElement} className="absolute left-[535px] top-[135px] inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
                 <option value='all' selected >
-                    همه سفارشات
+                    دسته بندی سفارشات (همه)
                 </option>
                 <option value='true' >
                     سفارشات تحویل داده شده
@@ -63,6 +92,16 @@ export const OrderManagement = () => {
                     سفارشات در انتظار تحویل
                 </option>
             </select>
+            <div className={`absolute top-[126px] left-[750px] w-[200px] border-b-2 border-gray-200`} >
+            <select onChange={filtering} ref={filterElement} className="py-2.5 inline px-0 w-[173px] text-sm text-gray-500 bg-transparent border-0 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                <option value='all' >فیلتر ها (همه)</option>
+                <option value='newer' >جدیدترین سفارش ها</option>
+                <option value='older' >قدیمی ترین سفارش ها</option>
+            </select>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="inline mr-2 bi bi-funnel" viewBox="0 0 16 16">
+              <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2h-11z"/>
+            </svg>
+          </div>
             <div className=" shadow-md sm:rounded-lg overflow-x-auto w-3/5 h-96 m-auto mt-20">
     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className=" text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
