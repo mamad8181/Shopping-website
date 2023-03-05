@@ -1,11 +1,12 @@
 import { IMAGES_BASE_URL } from '@/api'
 import { useRef, useState } from 'react'
+import { Pagination } from '../pagination/pagination'
 
 export const EdditProductModal= ({product, setEdditModal}: any) => {
     const insideWindow = useRef<HTMLDivElement>(null)
     let subcategory: string=''
     const productPrice: number = +product.price
-    
+    const [pages, setPages] = useState<[]>([])
     
     const closeModalHandler = (event: Event | undefined) => {
         
@@ -32,7 +33,7 @@ export const EdditProductModal= ({product, setEdditModal}: any) => {
                 <h3 className="mb-[20px] text-center mr-2 pt-[15px] text-xl font-medium text-gray-900 dark:text-white">اطلاعات محصول</h3>
             </div>
             <div className="flex px-6 py-3 lg:px-8">
-                <div className='flex'>
+                <div className='flex w-[60%]'>
                     <div className='w-[50%]'>
                     <p className='font-bold'>نام محصول:</p>
                     <p className='mb-[15px]'>{product.category}</p>
@@ -54,16 +55,15 @@ export const EdditProductModal= ({product, setEdditModal}: any) => {
                     <p className='mb-[15px]'>{product.description}</p>
                     </div>
                 </div>
-                <div className='border-r pr-6'>
-                    <p className='font-bold text-center mb-[65px]'>عکس(های)محصول</p>
+                <div className='border-r pr-6 w-[40%]'>
+                    <p className='font-bold text-center mb-[15px]'>عکس(های)محصول</p>
                     <div>
-                        {/* {itemsToDisplay.map((image: string) => (
-                        <div key={image}>
-                            <img src={`${IMAGES_BASE_URL}${image}`} className='w-[500px]'/>
-                        </div>
-                        ))} */}
-                        
-                        
+                        <>
+                        {pages.map((img: string) => {
+                            return <img src={`${IMAGES_BASE_URL}${img}`} className='m-auto' width='200px'/>
+                        })}
+                        <Pagination list={product.images} itemInPage={1} setPages={setPages}/>
+                        </>
                     </div>
                 </div>
             </div>
