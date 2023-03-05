@@ -92,7 +92,7 @@ export const OrderManagement = () => {
                     سفارشات در انتظار تحویل
                 </option>
             </select>
-            <div className={`absolute top-[126px] left-[750px] w-[200px] border-b-2 border-gray-200`} >
+            <div className={`absolute top-[126px] left-[755px] w-[200px] border-b-2 border-gray-200`} >
             <select onChange={filtering} ref={filterElement} className="py-2.5 inline px-0 w-[173px] text-sm text-gray-500 bg-transparent border-0 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
                 <option value='all' >فیلتر ها (همه)</option>
                 <option value='newer' >جدیدترین سفارش ها</option>

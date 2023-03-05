@@ -1,5 +1,5 @@
 import { getProducts, IMAGES_BASE_URL } from '@/api'
-import { Button, ProductsQtyBtns } from '@/components'
+import { Button, EdditProductModal, ProductsQtyBtns } from '@/components'
 import { useEffect, useRef, useState } from 'react'
 
 type dataObj= Record<string, unknown>
@@ -10,6 +10,7 @@ export const ProductsManagement = () => {
   const filterElement = useRef<HTMLSelectElement>(null)
   const [products, setProducts] = useState<dataObj[]>([])
   const [productsArray, setProductsArray] = useState<dataObj[]>()
+  const [edditModal, setEdditModal] = useState(null)
   const filterTemp: dataObj[] = []
 
   useEffect(() => {
@@ -94,6 +95,11 @@ export const ProductsManagement = () => {
     setProductsArray([...searchTemp])
   }
 
+  // const handleModalOpen = (a: any) => {
+  //   // setEdditModal(true)
+  //   return <EdditProductModal product={a} close={!edditModal} />
+  // };
+
   return (
     <div className='p-10 pt-16 relative' >
           <b className='text-2xl m-10' >جدول مدیریت محصولات</b>
@@ -145,8 +151,9 @@ export const ProductsManagement = () => {
             <tbody>
                 {(!productsArray ? products : productsArray).map((product: any) => {
                   const productPrice: number = +product.price
+                  // edditModal && setEdditModal(false)
                   return (
-                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={product.id} >
+                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={product.id} >
                             <td className="w-32 p-4 text-center">
                                 <img src={`${IMAGES_BASE_URL}${product.images[0]}`} className='m-auto' width='40' height='40'/>
                             </td>
@@ -167,7 +174,7 @@ export const ProductsManagement = () => {
                                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                 <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                               </svg>
-                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-info-circle cursor-pointer" viewBox="0 0 16 16">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" onClick={() => setEdditModal(product)} className="bi bi-info-circle cursor-pointer" viewBox="0 0 16 16">
                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                 <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
                               </svg>
@@ -178,6 +185,7 @@ export const ProductsManagement = () => {
             </tbody>
         </table>
       </div>
+                {edditModal && <EdditProductModal setEdditModal={setEdditModal} product={edditModal} />}
     </div>
   )
 }

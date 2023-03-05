@@ -1,6 +1,6 @@
 // import { getProducts } from 'api'
 // import { useEffect, useState } from 'react'
-// import poster from '../../assets/images/lki_hp_header_dt.jpg'
+import poster from '../../assets/images/Home-Poster.png'
 export const HomeScreen = () => {
   // const [products, setProducts] = useState([])
 
@@ -14,7 +14,7 @@ export const HomeScreen = () => {
 
   return (
     <div>
-        <img src={'https://www.maccosmetics.ca/media/export/cms/collections/locked_kiss_ink/lki_hp_header_dt.jpg'} />
+        <img src={poster.src} />
     </div>
   )
 }
