@@ -8,6 +8,18 @@ export const getProducts = () => {
   return INSTANCE.get('/products')
 }
 
+export const postProduct = (data: any) => {
+  return INSTANCE.post('/products', data)
+}
+
+export const deleteProduct = (id: any, config: any) => {
+  return INSTANCE.delete(`/products/${id}`, config)
+}
+
+export const editProduct = (id: any, data: any, config: any) => {
+  return INSTANCE.put(`/products/${id}`, data, config)
+}
+
 export const getOrders = () => {
   return INSTANCE.get('/orders')
 }
