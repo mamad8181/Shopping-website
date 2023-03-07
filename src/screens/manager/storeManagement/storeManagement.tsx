@@ -37,7 +37,7 @@ export const StoreManagement = () => {
         }
       }
 
-    const response = await deleteProduct(36, config)
+    const response = await deleteProduct(34, config)
 
 
   //   const config = {

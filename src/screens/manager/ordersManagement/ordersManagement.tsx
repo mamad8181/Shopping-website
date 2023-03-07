@@ -83,7 +83,7 @@ export const OrderManagement = () => {
         </div>
             <select onChange={filtering} ref={selectElement} className="absolute left-[535px] top-[135px] inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
                 <option value='all' selected >
-                    دسته بندی سفارشات (همه)
+                    وضعیت سفارشات (همه)
                 </option>
                 <option value='true' >
                     سفارشات تحویل داده شده
