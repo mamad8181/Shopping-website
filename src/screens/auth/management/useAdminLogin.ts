@@ -7,10 +7,6 @@ import { toast } from 'react-toastify'
 import { adminLogin } from '../../../api'
 import { useRouter } from 'next/router'
 
-// interface person{
-//   data: any
-// }
-
 const adminLoginSchema = yup
   .object({
     username: yup.string().required(),

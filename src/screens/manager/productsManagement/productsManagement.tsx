@@ -1,5 +1,5 @@
 import { getProducts, IMAGES_BASE_URL } from '@/api'
-import { AddProductModal, Button, InfoProductModal, ProductsQtyBtns } from '@/components'
+import { AddProductModal, Button, EdditProductModal, InfoProductModal, ProductsQtyBtns } from '@/components'
 import { DeleteProductModal } from '@/components/deleteProductModal/deleteProductModal'
 import { useEffect, useRef, useState } from 'react'
 
@@ -13,6 +13,7 @@ export const ProductsManagement = () => {
   const [productsArray, setProductsArray] = useState<dataObj[]>()
   const [infoModal, setInfoModal] = useState(null)
   const [deleteModal, setDeleteModal] = useState(null)
+  const [edditModal, setEdditModal] = useState(null)
   const [addModal, setAddModal] = useState(false)
   const filterTemp: dataObj[] = []
 
@@ -124,9 +125,9 @@ export const ProductsManagement = () => {
         </svg>
         <input onChange={filtering} ref={searchElement} className='w-4/5 text-base outline-none float-left bg-transparent' placeholder='جستوجو' />
     </div>
-      <div className="relative w-3/5 overflow-x-auto h-96 shadow-md sm:rounded-lg m-auto mt-20">
-        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <div className="relative w-3/5 overflow-auto h-96 shadow-md sm:rounded-lg m-auto mt-20">
+        <table className="w-full text-sm border-collapse text-left text-gray-500 dark:text-gray-400">
+            <thead className="text-xs sticky top-0 text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" className="px-6 py-3 text-center">
                         عکس
@@ -154,7 +155,7 @@ export const ProductsManagement = () => {
                                 <img src={`${IMAGES_BASE_URL}${product.images[0]}`} className='m-auto' width='40' height='40'/>
                             </td>
                             <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white text-center">
-                                {product.category} {product.brand} مدل {product.model}
+                                {product.category} {product.brand} {product.model && `مدل ${product.model}`}
                             </td>
                             <td className="px-6 py-4 text-center">
                                 <ProductsQtyBtns quantity={product.quantity} getterQuantity={getterQuantity} />
@@ -166,7 +167,7 @@ export const ProductsManagement = () => {
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" onClick={() => setDeleteModal(product)} className="bi bi-trash3-fill text-red-700 cursor-pointer" viewBox="0 0 16 16">
                                 <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
                               </svg>
-                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-square text-green-500 cursor-pointer" viewBox="0 0 16 16">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  onClick={() => setEdditModal(product)} className="bi bi-pencil-square text-green-500 cursor-pointer" viewBox="0 0 16 16">
                                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                 <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                               </svg>
@@ -182,6 +183,7 @@ export const ProductsManagement = () => {
         </table>
       </div>
       {infoModal && <InfoProductModal setInfoModal={setInfoModal} product={infoModal} />}
+      {edditModal && <EdditProductModal setEdditModal={setEdditModal} product={edditModal} />}
       {deleteModal && <DeleteProductModal setDeleteModal={setDeleteModal} product={deleteModal} />}
       {addModal && <AddProductModal setAddModal={setAddModal} />}
     </div>
