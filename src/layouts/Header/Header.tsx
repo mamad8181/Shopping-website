@@ -1,11 +1,12 @@
-import { HeaderLabel, Search } from '@/components'
-import React from 'react'
+import { HeaderLabel, HeaderNavbar, Search } from '@/components'
+import React, { useState } from 'react'
 
 import logo from '../../assets/images/lab-logo3.png'
 import { WebRoutes } from '@/routes'
 import Link from 'next/link'
 
 export const Header = () => {
+  const [showNavbar, setShowNavbar] = useState<string | null>(null)
 
   return (
     <div className='bg-white pt-3 px-10 pb-3' >
@@ -20,12 +21,13 @@ export const Header = () => {
       <Search className={`float-left bg-gray-100 w-36 p-2 pt-1 pb-2 rounded-full ml-[80px] mt-[-32px]`} />
         <div className='mt-4 w-1/2 m-auto mb-2'>
           <ul className='flex gap-10 justify-between px-5' >
-            {WebRoutes.map((route) =><li key={route.name} >
+            {WebRoutes.map((route) => <li onMouseEnter={() => setShowNavbar(route.name)} className='hover:underline' key={route.name} >
                 <Link href={route.path} >{route.name}</Link>
               </li>)
             }
           </ul>
         </div>
+      {showNavbar && <HeaderNavbar setShowNavbar={setShowNavbar} subCategory={showNavbar} />}
     </div>
   )
 }

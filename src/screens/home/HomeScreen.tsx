@@ -17,10 +17,10 @@ export const HomeScreen = () => {
 
       products = [...response.data]
 
-      for(let i: number= 0 ; tempProducts.length < 4 ; i += products.length / 4){
+      for(let i: number= 0 ; tempProducts.length < 4 ; i += Math.ceil(products.length / 4)){
         tempProducts.push(products[i])
       }
-
+      console.log(tempProducts)
       setExampleProducts([...tempProducts])
     }
 
@@ -31,7 +31,11 @@ export const HomeScreen = () => {
 
   return (
     <div>
-        <img src={poster.src} />
+        <div className='relative'>
+          <img src={poster.src} />
+          <p className="absolute top-[150px] left-[75px] w-[400px] text-center text-[50px] font-bold text-black" >بهترین کیفیت! بهترین قیمت!</p>
+          <p className="absolute top-[300px] left-[75px] w-[400px] text-center text-[25px] font-bold text-black" >با ما تجربه کنید</p>
+        </div>
         <div className='px-[40px]' >
           <b className='block text-[48px] mb-[30px]' >برخی از محصولات</b>
           <div className='flex gap-[10px] mb-[80px]' >
