@@ -5,7 +5,7 @@ import { Pagination } from '../pagination/pagination'
 export const InfoProductModal= ({product, setInfoModal}: any) => {
     let subcategory: string=''
     const productPrice: number = +product.price
-    const [pages, setPages] = useState<[]>([])
+    const [pagination, setPagination] = useState<[]>([])
 
     switch (product.subcategory){
         case 'face':
@@ -53,12 +53,10 @@ export const InfoProductModal= ({product, setInfoModal}: any) => {
                 <div className='border-r pr-6 w-[40%]'>
                     <p className='font-bold text-center mb-[15px]'>عکس(های)محصول</p>
                     <div>
-                        <>
-                        {pages.map((img: string) => {
-                            return <img src={`${IMAGES_BASE_URL}${img}`} className='m-auto' width='200px'/>
+                        {pagination.map((img: string) => {
+                            return <img src={`${IMAGES_BASE_URL}${img}`} className='max-h-[270px] m-auto' width='200px'/>
                         })}
-                        <Pagination className="absolute bottom-[15px] left-[160px]" list={product.images} itemInPage={1} setPages={setPages}/>
-                        </>
+                        <Pagination className="mt-[20px]" list={product.images} itemInPage={1} setPagination={setPagination}/>
                     </div>
                 </div>
             </div>

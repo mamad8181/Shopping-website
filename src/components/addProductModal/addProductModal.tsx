@@ -1,8 +1,7 @@
-import { postProduct } from "@/api"
+import { IMAGES_BASE_URL, postProduct, uploadImg } from "@/api"
 import { useRef, useState } from "react"
 import { Button } from "../Button/Button"
-import { TextField } from "../TextField/TextField"
-
+import { Pagination } from "../pagination/pagination"
 
 export const AddProductModal = ({setAddModal}: any) => {
     const nameField = useRef<HTMLInputElement>(null)
@@ -15,6 +14,8 @@ export const AddProductModal = ({setAddModal}: any) => {
     const colorsField = useRef<HTMLInputElement>(null)
     const descriptionField = useRef<HTMLInputElement>(null)
     const [errorState, setErrorState] = useState<boolean>(false)
+    const [images, setImages] = useState<string[]>([])
+    const [pagination, setPagination] = useState<[]>([])
     
     const addproductHandler = async () => {
         let errorFlag = false
@@ -26,7 +27,7 @@ export const AddProductModal = ({setAddModal}: any) => {
             "category": nameField.current!.value ? nameField.current!.value : errorFlag = true,
             "brand": brandField.current!.value ? brandField.current!.value : errorFlag = true,
             "model": modelField.current?.value,
-            "images": [],
+            "images": [...images],
             "colors": colorArray ? [...colorArray] : [],
             "description": descriptionField.current!.value ? descriptionField.current!.value : errorFlag = true,
             "price": priceField.current!.value ? priceField.current!.value : errorFlag = true,
@@ -49,6 +50,22 @@ export const AddProductModal = ({setAddModal}: any) => {
         }, 5000)
     }
 
+    const config = {
+        headers: {
+            'content-type': 'multipart/form-data',
+            token: localStorage.getItem('accessToken')
+        }
+    }
+
+    const sendImg = async (pic: any) => {
+        const formData = new FormData()
+        formData.append('image', pic)
+        const response = await uploadImg(formData, config)
+        setImages([...images, `${response.data.filename}`])
+    }
+
+    console.log(pagination)
+
     return(
         <div className={`fixed top-0 left-0 right-0 z-50 w-full bg-black bg-opacity-80 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full`}>
         <div className="relative mx-auto mt-[100px] w-3/5 h-full md:h-auto">
@@ -60,6 +77,7 @@ export const AddProductModal = ({setAddModal}: any) => {
                 </button>
                     <h3 className="mb-[20px] text-center mr-2 pt-[15px] text-xl font-medium text-gray-900 dark:text-white">اضافه کردن محصول</h3>
                 </div>
+                <div className="flex">
                 <div className='flex border-b py-[15px] px-[25px] w-[60%]'>
                     <div className='w-[50%]'>
                     <p className='font-bold'>نام محصول*:</p>
@@ -90,7 +108,24 @@ export const AddProductModal = ({setAddModal}: any) => {
                     <input ref={colorsField} className='bg-zinc-200 focus:bg-white px-[5px] border-2 border-zinc-500 rounded-lg mb-[15px]'/>
                     <p className='font-bold mt-[15px]'>توضیحات*:</p>
                     <input ref={descriptionField} className='bg-zinc-200 focus:bg-white px-[5px] border-2 border-zinc-500 rounded-lg mb-[15px]'/>
+                    <p className='font-bold mt-[15px]'>انتخاب عکس:</p>
+                    <input type='file' onChange={(event) => {
+                        const target = event.target as HTMLInputElement;
+                        if (target instanceof HTMLInputElement && target.files?.length) {
+                            sendImg(target.files[0]);
+                        }
+                    }}/>
                     </div>
+                </div>
+                <div className='border-r border-b py-[15px] px-[25px] w-[40%]'>
+                    <p className='font-bold text-center mb-[15px]'>عکس(های)محصول</p>
+                    <div>
+                        {pagination.map((img: string) => {
+                            return <img src={`${IMAGES_BASE_URL}${img}`} className='m-auto max-h-[270px]' width='200px'/>
+                        })}
+                        <Pagination className="mt-[20px]" list={images} itemInPage={1} setPagination={setPagination}/>
+                    </div>
+                </div>
                 </div>
                 <div className="relative py-[15px] px-[25px]" >
                     <>

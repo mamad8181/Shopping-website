@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Button } from "../Button/Button";
 
 
-export const Pagination = ({list, itemInPage, setPages, className}: any) => {
+export const Pagination = ({list, itemInPage, setPagination, className}: any) => {
     const pagenumbers: number = Math.ceil(list.length / itemInPage);
     let pagesBtn: any[] = []
 
@@ -13,11 +13,12 @@ export const Pagination = ({list, itemInPage, setPages, className}: any) => {
         for(let i = first; i < end; i++){
             list[i] && array.push(list[i])
         }
-        setPages([...array])
+        
+        setPagination([...array])
     }
 
     for(let i: number = 1 ; i <= pagenumbers ; i++){
-        if(pagenumbers > 1) pagesBtn = [...pagesBtn, <Button onClick={() => paginationHandler(i)} className="p-[7px] m-[2px] border-none rounded-sm bg-[#E6E4E4] text-black cursor-pointer active:bg-[#D5D1D1] " >{i}</Button>]
+        if(pagenumbers > 1) pagesBtn = [...pagesBtn, <Button key={i} onClick={() => paginationHandler(i)} className="p-[7px] m-[2px] border-none rounded-sm bg-[#E6E4E4] text-black cursor-pointer active:bg-[#D5D1D1] " >{i}</Button>]
     }
 
     useEffect(() => {

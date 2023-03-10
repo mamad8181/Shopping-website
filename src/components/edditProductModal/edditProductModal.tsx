@@ -1,6 +1,7 @@
-import { editProduct } from "@/api"
-import { useRef, useState } from "react"
+import { editProduct, IMAGES_BASE_URL, uploadImg } from "@/api"
+import { useEffect, useRef, useState } from "react"
 import { Button } from "../Button/Button"
+import { Pagination } from "../pagination/pagination"
 
 
 export const EdditProductModal = ({product, setEdditModal}: any) => {
@@ -14,6 +15,8 @@ export const EdditProductModal = ({product, setEdditModal}: any) => {
     const colorsField = useRef<HTMLInputElement>(null)
     const descriptionField = useRef<HTMLInputElement>(null)
     const [errorState, setErrorState] = useState<boolean>(false)
+    const [images, setImages] = useState<string[]>([...product.images])
+    const [pagination, setPagination] = useState<string[]>([])
 
     const edditproductHandler = async () => {
         let errorFlag = false
@@ -31,7 +34,7 @@ export const EdditProductModal = ({product, setEdditModal}: any) => {
             "category": nameField.current!.value ? nameField.current!.value : errorFlag = true,
             "brand": brandField.current!.value ? brandField.current!.value : errorFlag = true,
             "model": modelField.current?.value,
-            "images": [],
+            "images": [...images],
             "colors": colorArray ? [...colorArray] : [],
             "description": descriptionField.current!.value ? descriptionField.current!.value : errorFlag = true,
             "price": priceField.current!.value ? priceField.current!.value : errorFlag = true,
@@ -41,7 +44,7 @@ export const EdditProductModal = ({product, setEdditModal}: any) => {
         if(errorFlag == true) setErrorState(true)
         else {
             const response = await editProduct(product.id, data, config)
-            if(response.status == 201){
+            if(response.status == 200){
                 setEdditModal(null)
                 location.reload()
             }
@@ -54,6 +57,28 @@ export const EdditProductModal = ({product, setEdditModal}: any) => {
         }, 5000)
     }
 
+    const config = {
+        headers: {
+            'content-type': 'multipart/form-data',
+            token: localStorage.getItem('accessToken')
+        }
+    }
+
+    const sendImg = async (pic: any) => {
+        const formData = new FormData()
+        formData.append('image', pic)
+        const response = await uploadImg(formData, config)
+        setImages([...images, `${response.data.filename}`])
+    }
+
+    const imageDeleteHandler = (img: string) => {
+        const deletedArray: string[] = []
+        images.map(image => image != img && deletedArray.push(image))
+        setImages([...deletedArray])
+    }
+    console.log(images)
+    
+
     return(
         <div className={`fixed top-0 left-0 right-0 z-50 w-full bg-black bg-opacity-80 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full`}>
         <div className="relative mx-auto mt-[100px] w-3/5 h-full md:h-auto">
@@ -65,37 +90,59 @@ export const EdditProductModal = ({product, setEdditModal}: any) => {
                 </button>
                     <h3 className="mb-[20px] text-center mr-2 pt-[15px] text-xl font-medium text-gray-900 dark:text-white">ویرایش محصول</h3>
                 </div>
+                <div className="flex">
+
                 <div className='flex border-b py-[15px] px-[25px] w-[60%]'>
                     <div className='w-[50%]'>
                     <p className='font-bold'>نام محصول*:</p>
-                    <input ref={nameField} value={product.category} className='bg-zinc-200 focus:bg-white px-[5px] border-2 border-zinc-500 rounded-lg mb-[15px]'/>
+                    <input ref={nameField} defaultValue={product.category} className='bg-zinc-200 focus:bg-white px-[5px] border-2 border-zinc-500 rounded-lg mb-[15px]'/>
                     <p className='font-bold'>دسته بندی محصول*:</p>
-                    <select ref={subCategoryField} value={product.subcategory} className='bg-zinc-200 w-[194px] focus:bg-white px-[5px] py-0 border-2 border-zinc-500 rounded-lg mb-[15px]'>
+                    <select ref={subCategoryField} defaultValue={product.subcategory} className='bg-zinc-200 w-[194px] focus:bg-white px-[5px] py-0 border-2 border-zinc-500 rounded-lg mb-[15px]'>
                         <option value='' selected >انتخاب دسته بندی</option>
                         <option value='face'>صورت</option>
                         <option value='eye'>چشم</option>
                     </select>
                     <p className='font-bold'>مدل:</p>
-                    <input ref={modelField} value={product.model} className='bg-zinc-200 focus:bg-white px-[5px] border-2 border-zinc-500 rounded-lg mb-[15px]'/>
+                    <input ref={modelField} defaultValue={product.model} className='bg-zinc-200 focus:bg-white px-[5px] border-2 border-zinc-500 rounded-lg mb-[15px]'/>
                     <p className='font-bold'>برند*:</p>
-                    <input value={product.brand} ref={brandField} className='bg-zinc-200 focus:bg-white px-[5px] border-2 border-zinc-500 rounded-lg mb-[15px]'/>
+                    <input defaultValue={product.brand} ref={brandField} className='bg-zinc-200 focus:bg-white px-[5px] border-2 border-zinc-500 rounded-lg mb-[15px]'/>
                     <p className='font-bold'>نوع محصول*:</p>
-                    <select ref={regionField} value={product.region} className='bg-zinc-200 w-[194px] focus:bg-white px-[5px] py-0 border-2 border-zinc-500 rounded-lg mb-[15px]'>
+                    <select ref={regionField} defaultValue={product.region} className='bg-zinc-200 w-[194px] focus:bg-white px-[5px] py-0 border-2 border-zinc-500 rounded-lg mb-[15px]'>
                         <option value='' selected >انتخاب نوع</option>
                         <option value='inside'>ایرانی</option>
                         <option value='outside'>خارجی</option>
                     </select>
                     <p className='font-bold'>قیمت*:</p>
-                    <input type='number' ref={priceField} value={product.price} className='py-0 bg-zinc-200 focus:bg-white px-[5px] border-2 border-zinc-500 rounded-lg mb-[15px]'/>
+                    <input type='number' ref={priceField} defaultValue={product.price} className='py-0 bg-zinc-200 focus:bg-white px-[5px] border-2 border-zinc-500 rounded-lg mb-[15px]'/>
                     </div>
                     <div className='w-[50%] pl-6'>
                     <p className='font-bold'>تعداد*:</p>
-                    <input type='number' ref={qtyField} value={product.quantity} className='py-0 bg-zinc-200 focus:bg-white px-[5px] border-2 border-zinc-500 rounded-lg mb-[15px]'/>
+                    <input type='number' ref={qtyField} defaultValue={product.quantity} className='py-0 bg-zinc-200 focus:bg-white px-[5px] border-2 border-zinc-500 rounded-lg mb-[15px]'/>
                     <p className='font-bold'>رنگ(ها):</p>
-                    <input ref={colorsField} value={product.colors} className='bg-zinc-200 focus:bg-white px-[5px] border-2 border-zinc-500 rounded-lg mb-[15px]'/>
+                    <input ref={colorsField} defaultValue={product.colors} className='bg-zinc-200 focus:bg-white px-[5px] border-2 border-zinc-500 rounded-lg mb-[15px]'/>
                     <p className='font-bold mt-[15px]'>توضیحات*:</p>
-                    <input ref={descriptionField} value={product.description} className='bg-zinc-200 focus:bg-white px-[5px] border-2 border-zinc-500 rounded-lg mb-[15px]'/>
+                    <input ref={descriptionField} defaultValue={product.description} className='bg-zinc-200 focus:bg-white px-[5px] border-2 border-zinc-500 rounded-lg mb-[15px]'/>
+                    <p className='font-bold mt-[15px]'>اضافه کردن عکس:</p>
+                    <input type='file' onChange={(event) => {
+                        const target = event.target as HTMLInputElement;
+                        if (target instanceof HTMLInputElement && target.files?.length) {
+                            sendImg(target.files[0]);
+                        }
+                    }}/>
                     </div>
+                </div>
+                <div className='border-r border-b py-[15px] px-[25px] w-[40%]'>
+                    <p className='font-bold text-center mb-[15px]'>عکس(های)محصول</p>
+                    <div>
+                        {pagination.length == 0 ? <p>نو</p> : pagination.map((img: string) => {
+                            return <div>
+                                <img src={`${IMAGES_BASE_URL}${img}`} className='m-auto max-h-[270px]' width='200px'/>
+                                <p onClick={() => imageDeleteHandler(img)} className="text-red-600 text-center border-2 border-red-600 rounded-md hover:bg-red-100 cursor-pointer w-[200px] m-auto" >حذف تصویر</p>
+                            </div>
+                        })}
+                        <Pagination className="mt-[20px]" list={images} itemInPage={1} setPagination={setPagination}/>
+                    </div>
+                </div>
                 </div>
                 <div className="relative py-[15px] px-[25px]" >
                     <>

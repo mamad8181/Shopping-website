@@ -44,7 +44,7 @@ export const HomeScreen = () => {
               return(
                 <div key={product.id} className='w-[25%] shadow-lg mt-[20px]' >
                   <div>
-                    <img onMouseEnter={() => console.log('aaa')} src={`${IMAGES_BASE_URL}${product.images[0]}`}/>
+                    <img className='max-h-[300px] m-auto' src={`${IMAGES_BASE_URL}${product.images[0]}`}/>
                   </div>
                   <div className='text-center pb-[20px]'>
                     <b className='block mb-[35px]'>{product.category} {product.brand}</b>
