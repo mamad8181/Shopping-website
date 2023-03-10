@@ -6,7 +6,7 @@ type props = {
   className: string,
   children: React.ReactNode,
   type? : any,
-  onClick? : () => void,
+  onClick? : (event: any) => void,
   loading? : boolean
 }
 
