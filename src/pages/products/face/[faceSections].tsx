@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 import facePoster from "../../../assets/images/face-poster .jpg"
 
-const ProductsPages = () => {
+const FaceProducts = () => {
     const router = useRouter()
 
     const page: string | string[] | undefined = router.query.faceSections
@@ -21,4 +21,4 @@ const ProductsPages = () => {
     )
 }
 
-export default ProductsPages;
+export default FaceProducts;
