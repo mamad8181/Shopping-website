@@ -1,5 +1,6 @@
 import { getProducts, IMAGES_BASE_URL } from '@/api'
 import { Button } from '@/components'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import poster from '../../assets/images/Home-Poster.png'
 import secoundPoster from '../../assets/images/secound-poster.png'
@@ -62,19 +63,35 @@ export const HomeScreen = () => {
             <b className='absolute top-[40px] text-[48px]' >محصولات بیشتری مشاهده کنید</b>
             <div className='absolute bottom-[25px] right-[70px]'>
               <b className='text-[30px] block mb-[10px]'>صورت</b>
-              <b className='underline cursor-pointer' >جستوجو</b>
+              <b className='underline cursor-pointer' >
+                <Link href={'/products/face/کرم%E2%80%8Cپودر'}>
+                  جستوجو
+                </Link>
+              </b>
             </div>
             <div className='absolute bottom-[25px] right-[405px]'>
               <b className='text-[30px] block mb-[10px]'>ابرو</b>
-              <b className='underline cursor-pointer'>جستوجو</b>
+              <b className='underline cursor-pointer'>
+                <Link href={''}>
+                  جستوجو
+                </Link>
+              </b>
             </div>
             <div className='absolute bottom-[25px] left-[630px]'>
               <b className='text-[30px] block mb-[10px]'>چشم</b>
-              <b className='underline cursor-pointer'>جستوجو</b>
+              <b className='underline cursor-pointer'>
+                <Link href={'/products/eye/خط%E2%80%8Cچشم'}>
+                  جستوجو
+                </Link>
+              </b>
             </div>
             <div className='absolute bottom-[25px] left-[305px]'>
               <b className='text-[30px] block mb-[10px]'>لب</b>
-              <b className='underline cursor-pointer'>جستوجو</b>
+              <b className='underline cursor-pointer'>
+                <Link href={''}>
+                  جستوجو
+                </Link>
+              </b>
             </div>
           </div>
         </div>

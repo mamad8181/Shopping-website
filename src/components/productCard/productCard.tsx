@@ -12,7 +12,7 @@ export const ProductCard = ({product}: myProps) => {
     return(
         <div className='relative cursor-pointer w-full shadow-lg mt-[20px]' >
           <div>
-            <img className='max-h-[300px] m-auto' src={`${IMAGES_BASE_URL}${product.images[0]}`} width='400' />
+            <img className='max-h-[300px] max-w-[300px] m-auto' src={`${IMAGES_BASE_URL}${product.images[0]}`} width='400' />
           </div>
           <div className='text-center pb-[20px]'>
             <b className='block mb-[35px]'>{product.category} {product.brand}</b>
