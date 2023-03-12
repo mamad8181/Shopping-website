@@ -1,32 +1,20 @@
-import { getProducts } from "@/api";
 import { createSlice } from "@reduxjs/toolkit";
-import { useEffect } from "react";
 
-// useEffect(() => {
-//     const productsGetter = async () => {
-//       const response = await getProducts()
-//       setProducts([...response.data])
-//     }
-//     productsGetter()
-//   }, [])
-
-const initialState = {counter: 0}
-
+const initialState = {bagCounter: 0, bagProducts: []}
 
 const counterSlice = createSlice({
     name: 'counter',
     initialState: initialState,
     reducers: {
         increment(state, action){
-            state.counter = action.payload + 1
-        },
-        decrement(state, action){
-            state.counter = action.payload - 1
+            const obj= action.payload
+            state.bagProducts = [...state.bagProducts, obj]
+            state.bagCounter = state.bagProducts.length
+            console.log(state.bagProducts)
+            console.log(action.payload)
         }
     }
 })
-
-// console.log(counterSlice.getInitialState())
 
 export const counterActions = counterSlice.actions
 

@@ -1,12 +1,14 @@
 import { getProducts, IMAGES_BASE_URL } from '@/api'
 import { Button } from '@/components'
+import { counterActions } from '@/store/productCounter'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import poster from '../../assets/images/Home-Poster.png'
 import secoundPoster from '../../assets/images/secound-poster.png'
 import thirdPoster from '../../assets/images/third-poster.png'
 export const HomeScreen = () => {
-  // const [products, setProducts] = useState<object[]>([])
+  const dispatch = useDispatch()
   const [exampleProducts, setExampleProducts] = useState<object[]>([])
   
   useEffect(() => {
@@ -27,6 +29,10 @@ export const HomeScreen = () => {
 
     productsGetter()
   }, [])
+
+  const bagProductsAdder = (product: any) => {
+    dispatch(counterActions.increment(product))
+  }
 
 
 
@@ -51,8 +57,8 @@ export const HomeScreen = () => {
                     <b className='block mb-[35px]'>{product.category} {product.brand}</b>
                     <b className='block mb-[10px]'>{productPrice.toLocaleString()} تومان</b>
                     <p>{product.model}</p><br/>
-                    <Button className='rounded-full py-[10px] px-[10px] ml-[15px] bg-white text-black border border-black text-center' >مشاهده محصول</Button>
-                    <Button className='rounded-full  py-[10px] px-[10px] bg-black text-white' >افزودن به سبد خرید</Button>
+                    <Button className='rounded-full py-[10px] px-[10px] pt-[6px] ml-[15px] bg-white text-black border border-black text-center' >مشاهده محصول</Button>
+                    <Button onClick={() => bagProductsAdder(product)} className='rounded-full  py-[10px] px-[10px] pt-[6px] bg-black text-white' >افزودن به سبد خرید</Button>
                   </div>
                 </div>
               )
