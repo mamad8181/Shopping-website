@@ -4,7 +4,7 @@ import { Button } from "../Button/Button"
 import { Pagination } from "../pagination/pagination"
 
 
-export const EdditProductModal = ({product, setEdditModal}: any) => {
+export const EdditProductModal = ({product, setEdditModal, reRenderHandler}: any) => {
     const nameField = useRef<HTMLInputElement>(null)
     const subCategoryField = useRef<HTMLSelectElement>(null)
     const modelField = useRef<HTMLInputElement>(null)
@@ -38,7 +38,6 @@ export const EdditProductModal = ({product, setEdditModal}: any) => {
             "colors": colorArray ? [...colorArray] : [],
             "description": descriptionField.current!.value ? descriptionField.current!.value : errorFlag = true,
             "price": priceField.current!.value ? priceField.current!.value : errorFlag = true,
-            "quantity": +qtyField.current!.value ? qtyField.current!.value : errorFlag = true,
         }
 
         if(errorFlag == true) setErrorState(true)
@@ -46,7 +45,7 @@ export const EdditProductModal = ({product, setEdditModal}: any) => {
             const response = await editProduct(product.id, data, config)
             if(response.status == 200){
                 setEdditModal(null)
-                location.reload()
+                reRenderHandler()
             }
         }
     }
@@ -116,8 +115,6 @@ export const EdditProductModal = ({product, setEdditModal}: any) => {
                     <input type='number' ref={priceField} defaultValue={product.price} className='py-0 bg-zinc-200 focus:bg-white px-[5px] border-2 border-zinc-500 rounded-lg mb-[15px]'/>
                     </div>
                     <div className='w-[50%] pl-6'>
-                    <p className='font-bold'>تعداد*:</p>
-                    <input type='number' ref={qtyField} defaultValue={product.quantity} className='py-0 bg-zinc-200 focus:bg-white px-[5px] border-2 border-zinc-500 rounded-lg mb-[15px]'/>
                     <p className='font-bold'>رنگ(ها):</p>
                     <input ref={colorsField} defaultValue={product.colors} className='bg-zinc-200 focus:bg-white px-[5px] border-2 border-zinc-500 rounded-lg mb-[15px]'/>
                     <p className='font-bold mt-[15px]'>توضیحات*:</p>

@@ -1,5 +1,5 @@
 import { Header } from "@/layouts";
-import { ProductDetails, ProductsScreen } from "@/screens";
+import { ProductDetails } from "@/screens";
 import { useRouter } from "next/router";
 
 
@@ -7,12 +7,12 @@ import { useRouter } from "next/router";
 const ProductsPages = () => {
     const router = useRouter()
 
-    const page: string | string[] | undefined = router.query.managementPages
+    const page: string | string[] | undefined = router.query.productsPages
 
     return(
         <>
             <Header/>
-            <ProductDetails section={page} />
+            <ProductDetails productID={page} />
         </>
     )
 }

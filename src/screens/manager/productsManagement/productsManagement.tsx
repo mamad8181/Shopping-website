@@ -15,6 +15,7 @@ export const ProductsManagement = () => {
   const [deleteModal, setDeleteModal] = useState(null)
   const [edditModal, setEdditModal] = useState(null)
   const [addModal, setAddModal] = useState(false)
+  const [reRender, setReRender] = useState<boolean>(false)
   const filterTemp: dataObj[] = []
 
   useEffect(() => {
@@ -23,10 +24,10 @@ export const ProductsManagement = () => {
       setProducts([...response.data])
     }
     productsGetter()
-  }, [])
+  }, [reRender])
 
-  const getterQuantity= (number: number) => {
-    // console.log(number)
+  const reRenderHandler= () => {
+    setReRender(!reRender)
   }
 
   const filtering = () => {
@@ -158,7 +159,7 @@ export const ProductsManagement = () => {
                                 {product.category} {product.brand} {product.model && `مدل ${product.model}`}
                             </td>
                             <td className="px-6 py-4 text-center">
-                                <ProductsQtyBtns quantity={product.quantity} getterQuantity={getterQuantity} />
+                                <ProductsQtyBtns product={product} reRenderHandler={reRenderHandler} />
                             </td>
                             <td className="px-2 py-4 font-semibold text-gray-900 dark:text-white">
                                 {productPrice.toLocaleString()} تومان
@@ -183,8 +184,8 @@ export const ProductsManagement = () => {
         </table>
       </div>
       {infoModal && <InfoProductModal setInfoModal={setInfoModal} product={infoModal} />}
-      {edditModal && <EdditProductModal setEdditModal={setEdditModal} product={edditModal} />}
-      {deleteModal && <DeleteProductModal setDeleteModal={setDeleteModal} product={deleteModal} />}
+      {edditModal && <EdditProductModal reRenderHandler={reRenderHandler} setEdditModal={setEdditModal} product={edditModal} />}
+      {deleteModal && <DeleteProductModal reRenderHandler={reRenderHandler} setDeleteModal={setDeleteModal} product={deleteModal} />}
       {addModal && <AddProductModal setAddModal={setAddModal} />}
     </div>
   )

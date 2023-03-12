@@ -3,7 +3,7 @@ import { useState } from "react"
 import { Button } from "../Button/Button"
 
 
-export const DeleteProductModal = ({product, setDeleteModal}: any) => {
+export const DeleteProductModal = ({product, setDeleteModal, reRenderHandler}: any) => {
     const [error, setError] = useState(false)
 
     const deleteHandler = async () => {
@@ -13,9 +13,10 @@ export const DeleteProductModal = ({product, setDeleteModal}: any) => {
             }
         }
     
-        const response = await deleteProduct(product.id, config)
-        console.log(response.status)
-        response.status == 200 ? setDeleteModal(null) : setError(true)
+        await deleteProduct(product.id, config)
+        reRenderHandler()
+        setDeleteModal(null)
+        // response.status == 200 ?  : setError(true)
     }
 
     return(
@@ -32,10 +33,10 @@ export const DeleteProductModal = ({product, setDeleteModal}: any) => {
             <div className="py-[15px] px-[25px]" >
                 <p className="text-[20px] mb-[50px]" >آیا از حذف "{product.category} {product.brand}" اطمینان دارید؟</p>
                 {error && <p className="absolute top-0 font-bold mt-2 text-sm text-red-500 dark:text-red-400">اخطار: شما اجازه حذف محصول را ندارید(No Token Exist)</p>}
-                <form className="text-center" >
-                    <Button type='submit' onClick={deleteHandler} className="bg-green-600 hover:bg-green-700 ml-[15px] text-white rounded-2xl py-[10px] px-[25px] " >بله</Button>
+                <div className="text-center" >
+                    <Button onClick={deleteHandler} className="bg-green-600 hover:bg-green-700 ml-[15px] text-white rounded-2xl py-[10px] px-[25px] " >بله</Button>
                     <Button  onClick={() => setDeleteModal(null)} className="bg-red-700 hover:bg-red-800 text-white rounded-2xl py-[10px] px-[25px] " >خیر</Button>
-                </form>
+                </div>
             </div>
         </div>
     </div>

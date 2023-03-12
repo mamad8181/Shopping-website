@@ -5,6 +5,7 @@ import { Button, HeaderLabel, TextField } from '../../../components'
 export const StoreManagement = () => {
   const [product, setProduct] = useState<string>()
   const productInput = useRef<HTMLInputElement>(null)
+
   // const config = {
   //   headers: {
   //     'content-type': 'multipart/form-data',
@@ -31,13 +32,13 @@ export const StoreManagement = () => {
     //   console.log(productInput.current)
     // }
 
-    const config = {
-        headers: {
-          token: localStorage.getItem('accessToken')
-        }
-      }
+    // const config = {
+    //     headers: {
+    //       token: localStorage.getItem('accessToken')
+    //     }
+    //   }
 
-    const response = await deleteProduct(34, config)
+    // const response = await deleteProduct(34, config)
 
 
   //   const config = {
