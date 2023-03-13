@@ -20,6 +20,8 @@ export const AddProductModal = ({setAddModal}: any) => {
     const addproductHandler = async () => {
         let errorFlag = false
         const colorArray = colorsField.current?.value.split(',')
+        const currentDate = new Date()
+        const dateInMs = currentDate.getTime()
 
         const data = {
             "region": regionField.current!.value ? regionField.current!.value : errorFlag = true,
@@ -31,6 +33,7 @@ export const AddProductModal = ({setAddModal}: any) => {
             "colors": colorArray ? [...colorArray] : [],
             "description": descriptionField.current!.value ? descriptionField.current!.value : errorFlag = true,
             "price": priceField.current!.value ? priceField.current!.value : errorFlag = true,
+            "createdAt": dateInMs,
             "quantity": +qtyField.current!.value ? qtyField.current!.value : errorFlag = true,
         }
 

@@ -1,6 +1,7 @@
 import { IMAGES_BASE_URL } from '@/api'
 import { useState } from 'react'
 import { Pagination } from '../pagination/pagination'
+import moment from 'jalali-moment';
 
 export const InfoProductModal= ({product, setInfoModal}: any) => {
     let subcategory: string=''
@@ -15,6 +16,9 @@ export const InfoProductModal= ({product, setInfoModal}: any) => {
             subcategory = 'چشم'
             break;
     }
+
+    const timestamp = product.createdAt;
+    const persianDate = moment(timestamp).format('jYYYY/jM/jD');
 
     return (
         <div onClick={() => setInfoModal(null)} id="authentication-modal" aria-hidden="true" className={`fixed top-0 left-0 right-0 z-50 w-full bg-black bg-opacity-80 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full`}>
@@ -48,6 +52,8 @@ export const InfoProductModal= ({product, setInfoModal}: any) => {
                     {product.colors.length != 0 ? product.colors.map((color: string) => <p>{color}</p>) : <p className='text-zinc-500'>محصول بدون رنگ بندی می باشد!</p>}
                     <p className='font-bold mt-[15px]'>توضیحات:</p>
                     <p className='mb-[15px]'>{product.description}</p>
+                    <p className='font-bold mt-[15px]'>تاریخ اضافه شدن محصول:</p>
+                    <p className='mb-[15px]'>{persianDate}</p>
                     </div>
                 </div>
                 <div className='border-r pr-6 w-[40%]'>
