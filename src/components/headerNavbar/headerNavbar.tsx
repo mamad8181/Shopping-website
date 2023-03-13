@@ -19,6 +19,12 @@ export const HeaderNavbar = ({subCategory, setShowNavbar}: myProps) => {
         case 'چشم':
             productSubCategory = 'eye'
             break;
+        case 'لب':
+            productSubCategory = 'lips'
+            break;
+        case 'ابرو':
+            productSubCategory = 'eyebrow'
+            break;
     }
 
     useEffect(() => {

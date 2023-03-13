@@ -38,6 +38,8 @@ export const EdditProductModal = ({product, setEdditModal, reRenderHandler}: any
             "colors": colorArray ? [...colorArray] : [],
             "description": descriptionField.current!.value ? descriptionField.current!.value : errorFlag = true,
             "price": priceField.current!.value ? priceField.current!.value : errorFlag = true,
+            "createdAt": product.createdAt,
+            "quantity": product.quantity
         }
 
         if(errorFlag == true) setErrorState(true)
@@ -100,6 +102,8 @@ export const EdditProductModal = ({product, setEdditModal, reRenderHandler}: any
                         <option value='' selected >انتخاب دسته بندی</option>
                         <option value='face'>صورت</option>
                         <option value='eye'>چشم</option>
+                        <option value='lips'>لب</option>
+                        <option value='eyebrow'>ابرو</option>
                     </select>
                     <p className='font-bold'>مدل:</p>
                     <input ref={modelField} defaultValue={product.model} className='bg-zinc-200 focus:bg-white px-[5px] border-2 border-zinc-500 rounded-lg mb-[15px]'/>
@@ -131,7 +135,7 @@ export const EdditProductModal = ({product, setEdditModal, reRenderHandler}: any
                 <div className='border-r border-b py-[15px] px-[25px] w-[40%]'>
                     <p className='font-bold text-center mb-[15px]'>عکس(های)محصول</p>
                     <div>
-                        {pagination.length == 0 ? <p>نو</p> : pagination.map((img: string) => {
+                        {pagination.length == 0 ? <p className="text-center mt-[150px] " >تصویری برای این محصول وجود ندارد.</p> : pagination.map((img: string) => {
                             return <div>
                                 <img src={`${IMAGES_BASE_URL}${img}`} className='m-auto max-h-[270px]' width='200px'/>
                                 <p onClick={() => imageDeleteHandler(img)} className="text-red-600 text-center border-2 border-red-600 rounded-md hover:bg-red-100 cursor-pointer w-[200px] m-auto" >حذف تصویر</p>

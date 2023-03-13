@@ -15,6 +15,12 @@ export const InfoProductModal= ({product, setInfoModal}: any) => {
         case 'eye':
             subcategory = 'چشم'
             break;
+        case 'lips':
+            subcategory = 'لب'
+            break;
+        case 'eyebrow':
+            subcategory = 'ابرو'
+            break;
     }
 
     const timestamp = product.createdAt;
@@ -59,8 +65,8 @@ export const InfoProductModal= ({product, setInfoModal}: any) => {
                 <div className='border-r pr-6 w-[40%]'>
                     <p className='font-bold text-center mb-[15px]'>عکس(های)محصول</p>
                     <div>
-                        {pagination.map((img: string) => {
-                            return <img src={`${IMAGES_BASE_URL}${img}`} className='max-h-[270px] m-auto' width='200px'/>
+                        {pagination.length == 0 ? <p className="text-center mt-[150px] " >تصویری برای این محصول وجود ندارد.</p> : pagination.map((img: string) => {
+                            return <img src={`${IMAGES_BASE_URL}${img}`} className='m-auto max-h-[270px]' width='200px'/>  
                         })}
                         <Pagination className="mt-[20px]" list={product.images} itemInPage={1} setPagination={setPagination}/>
                     </div>

@@ -90,6 +90,8 @@ export const AddProductModal = ({setAddModal}: any) => {
                         <option value='' selected >انتخاب دسته بندی</option>
                         <option value='face'>صورت</option>
                         <option value='eye'>چشم</option>
+                        <option value='lips'>لب</option>
+                        <option value='eyebrow'>ابرو</option>
                     </select>
                     <p className='font-bold'>مدل:</p>
                     <input ref={modelField} className='bg-zinc-200 focus:bg-white px-[5px] border-2 border-zinc-500 rounded-lg mb-[15px]'/>
