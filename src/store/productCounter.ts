@@ -1,24 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {bagCounter: 0, bagProducts: []}
+const initialState: any = {bagCounter: 0, bagProducts: []}
+let newBag: any[] = []
 
 const cam = (bagProducts: any, newProduct: any) => {
-    if(bagProducts.length == 0){
-        newProduct.quantity = 1
-        bagProducts = [newProduct]
-        return bagProducts
+    newBag = []
+    if(!bagProducts.length){
+        newProduct["inBag"] = 1
+        newBag.push(newProduct)
     }
-    else{
-        console.log(bagProducts)
-        bagProducts?.map((product:any) => product.id == newProduct.id ? () => {
-            product.quantity++
-            return bagProducts
-        } : () => {
-            newProduct.quantity = 1
-            bagProducts = [...bagProducts, newProduct]
-            return bagProducts
-        })
+    else {
+        bagProducts.map((product: any) => newBag.push(product))
+        const found = newBag.find((product: any) => product.id == newProduct.id && product.inBag++)
+        if(!found){
+            newProduct["inBag"] = 1
+            newBag.push(newProduct)
+        }
     }
+    console.log(bagProducts)
 }
 
 const counterSlice = createSlice({
@@ -26,15 +25,15 @@ const counterSlice = createSlice({
     initialState: initialState,
     reducers: {
         increment(state, action){
-            let temp: number = 0
             console.log(state.bagProducts)
-            const arrayTemp = cam(state.bagProducts, action.payload)
-            state.bagProducts = arrayTemp
-            // state.bagProducts.length != 0 && state.bagProducts.map((product:any) => (product && product.id == action.payload.id) ? product.quantity++ : cam(action.payload))
-            // state.bagProducts = [...state.bagProducts, action.payload]
-            state.bagProducts.map((product:any) => temp = temp + product.quantity)
-            state.bagCounter = temp
-            console.log(temp)
+            let tempCount: number= 0
+            cam(state.bagProducts, action.payload)
+            newBag.map((product: any) => {
+                state.bagProducts.push(product)
+                tempCount += product.inBag
+            })
+            state.bagCounter = tempCount
+            console.log(state.bagCounter)
         }
     }
 })

@@ -1,4 +1,5 @@
 import { getProducts, IMAGES_BASE_URL } from "@/api"
+import { Button } from "@/components"
 import { useEffect, useState } from "react"
 
 interface myProps{
@@ -11,33 +12,40 @@ export const ProductDetails = ({productID}: myProps) => {
     useEffect(() => {
         const productsGetter = async () => {
             const response = await getProducts()
-            // response.data.map((product: any) => product.id == productID && setProduct(product))
-            setProduct([...response.data])
+            response.data.map((product: any) => product.id == productID && setProduct(product))
         }
-        console.log('aaaa')
         productsGetter()
     }, [])
 
-    // console.log(product)
+    const productPrice: number = +product?.price
 
-    // const productPrice: number = +product.price
-    
     return(
-    <></>
-        // <div className="flex p-[50px]">
-            /* <div >
-                <p className="text-[35px] font-bold w-[35%]">
-                    {product.category} {product.brand} <span className="text-[25px] float-left mt-[20px]" >{productPrice.toLocaleString()} تومان</span>
+        <div className="flex p-[50px] px-[70px] gap-[70px]">
+            <div className="w-[35%] " >
+                <span className="text-[25px] font-bold float-left mt-[15px]" >{productPrice?.toLocaleString()} تومان</span>
+                <p className="text-[35px] w-[250px] font-bold">
+                    {product?.category} {product?.brand} 
                 </p>
-                <p>
-                    {product.model && `مدل ${product.model}`}
+                <p className="text-[20px] font-bold mt-[10px]" >
+                    {product?.model && `مدل ${product?.model}`}
                 </p>
-            </div>
-            <div className="grid grid-cols-2 w-[65%]" >
-                {product?.images.map((img: string) => {
-                    return <img className='max-h-[300px] max-w-[300px] shadow-xl m-auto' src={`${IMAGES_BASE_URL}${img}`} />
+                <div>
+                    {product?.colors[0] == '' ? <p className="mt-[35px] mb-[50px]" >محصول تک رنگ می باشد!</p> : 
+                    <select  className="mt-[35px] mb-[50px] rounded-2xl">
+                        {product?.colors.map((color: string) => <option value={color} >{color}</option>)}
+                    </select> 
+                    }
+                </div>
+                <p className="mb-[50px] font-bold" >{product?.description}</p>
+                <Button onClick={e => {
+                    e.stopPropagation()
+                    // bagProductsAdder(product)
+                }} className='w-full rounded-full py-[10px] px-[20px] pt-[6px] bg-[#CE4545] text-white hover:bg-red-700' >افزودن به سبد خرید</Button>            </div>
+            <div className={product?.images.length == 1 ? `w-[65%]` : 'w-[65%] grid grid-cols-2 gap-[20px]'} >
+                {product?.images?.map((img: string) => {
+                    return <img className='max-h-[435px] max-w-[100%] shadow-xl m-auto' src={`${IMAGES_BASE_URL}${img}`} />
                 })}
             </div>
-        </div> */
+        </div>
     )
 }

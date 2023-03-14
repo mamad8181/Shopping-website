@@ -30,7 +30,7 @@ export const ProductCard = ({product}: myProps) => {
             <Button onClick={e => {
               e.stopPropagation()
               bagProductsAdder(product)
-              }} className='rounded-full py-[10px] px-[10px] pt-[6px] bg-black text-white hover:bg-zinc-700' >افزودن به سبد خرید</Button>
+              }} className='rounded-full py-[10px] px-[20px] pt-[6px] bg-[#CE4545] text-white hover:bg-red-700' >افزودن به سبد خرید</Button>
           </div>
         </div>
       )

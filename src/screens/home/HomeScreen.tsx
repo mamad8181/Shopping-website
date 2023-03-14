@@ -2,28 +2,42 @@ import { getProducts, IMAGES_BASE_URL } from '@/api'
 import { Button } from '@/components'
 import { counterActions } from '@/store/productCounter'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import poster from '../../assets/images/Home-Poster.png'
 import secoundPoster from '../../assets/images/secound-poster.png'
 import thirdPoster from '../../assets/images/third-poster.png'
+
+
 export const HomeScreen = () => {
+  const router = useRouter()
   const dispatch = useDispatch()
   const [exampleProducts, setExampleProducts] = useState<object[]>([])
   
   useEffect(() => {
     let tempProducts: object[]= []
     let products: object[]= []
+    let randomProductsArr: number[]= []
 
     const productsGetter = async () => {
       const response = await getProducts()
 
       products = [...response.data]
 
-      for(let i: number= 0 ; tempProducts.length < 4 ; i += Math.ceil(products.length / 4)){
-        tempProducts.push(products[i])
+      for(let i: number= 0 ; tempProducts.length < 4 ; i++){
+        const randomproduct: any = products[Math.floor(Math.random() * products.length) - 1]
+        if(randomProductsArr.length == 0){
+          tempProducts.push(randomproduct)
+          randomProductsArr.push(randomproduct)
+        }
+        else{
+          randomProductsArr.includes(randomproduct) == false && tempProducts.push(randomproduct)
+          randomProductsArr.push(randomproduct)
+        }
+        console.log(randomproduct.id)
       }
-      console.log(tempProducts)
+      // console.log(tempProducts)
       setExampleProducts([...tempProducts])
     }
 
@@ -57,8 +71,8 @@ export const HomeScreen = () => {
                     <b className='block mb-[35px]'>{product.category} {product.brand}</b>
                     <b className='block mb-[10px]'>{productPrice.toLocaleString()} تومان</b>
                     <p>{product.model}</p><br/>
-                    <Button className='rounded-full py-[10px] px-[10px] pt-[6px] ml-[15px] bg-white text-black border border-black text-center' >مشاهده محصول</Button>
-                    <Button onClick={() => bagProductsAdder(product)} className='rounded-full  py-[10px] px-[10px] pt-[6px] bg-black text-white' >افزودن به سبد خرید</Button>
+                    <Button onClick={() => router.push(`/products/${product.id}`)} className='rounded-full py-[10px] px-[20px] pt-[6px] ml-[10px] bg-white text-black border border-black text-center' >مشاهده محصول</Button>
+                    <Button onClick={() => bagProductsAdder(product)} className='rounded-full  py-[10px] px-[20px] pt-[6px] bg-[#CE4545] text-white hover:bg-red-700' >افزودن به سبد خرید</Button>
                   </div>
                 </div>
               )
