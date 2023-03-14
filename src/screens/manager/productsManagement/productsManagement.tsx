@@ -17,6 +17,7 @@ export const ProductsManagement = () => {
   const [addModal, setAddModal] = useState(false)
   const [reRender, setReRender] = useState<boolean>(false)
   let filterTemp: dataObj[] = []
+  const regionFilterTemp: dataObj[] = []
 
   useEffect(() => {
     const productsGetter = async () => {
@@ -55,13 +56,25 @@ export const ProductsManagement = () => {
             return (a.quantity as number) - (b.quantity as number)
           })
           break;
+        case 'newer':
+          filterTemp.sort((a, b) => {
+            return (b.createdAt as number) - (a.createdAt as number)
+          })
+          break;
+        case 'older':
+          filterTemp.sort((a, b) => {
+            return (a.createdAt as number) - (b.createdAt as number)
+          })
+          break;
         case 'inside':
           filterTemp = []
-          products.map((product) => filterElement.current!.value === product.region && filterTemp.push(product))
+          products.map((product: any) => selectElement.current!.value === product.subcategory && regionFilterTemp.push(product))
+          regionFilterTemp.map((product: any) => filterElement.current!.value === product.region && filterTemp.push(product))
           break;
         case 'outside':
           filterTemp = []
-          products.map((product) => filterElement.current!.value === product.region && filterTemp.push(product))
+          products.map((product: any) => selectElement.current!.value === product.subcategory && regionFilterTemp.push(product))
+          regionFilterTemp.map((product: any) => filterElement.current!.value === product.region && filterTemp.push(product))
           break;
         default:
           break;
@@ -93,6 +106,17 @@ export const ProductsManagement = () => {
           filterTemp.sort((a, b) => {
             return (a.quantity as number) - (b.quantity as number)
           })
+          break;
+        case 'newer':
+          filterTemp.sort((a, b) => {
+            return (b.createdAt as number) - (a.createdAt as number)
+          })
+          break;
+        case 'older':
+          filterTemp.sort((a, b) => {
+            return (a.createdAt as number) - (b.createdAt as number)
+          })
+          break;
         case 'inside':
           filterTemp = []
           products.map((product) => filterElement.current!.value === product.region && filterTemp.push(product))
@@ -121,6 +145,8 @@ export const ProductsManagement = () => {
               <option value='all' selected>دسته بندی ها (همه)</option>
               <option value='face'>محصولات صورت</option>
               <option value='eye'>محصولات چشم</option>
+              <option value='lips'>محصولات لب</option>
+              <option value='eyebrow'>محصولات ابرو</option>
           </select>
           <div className={`absolute top-[124px] left-[785px] w-[160px] border-b-2 border-gray-200`} >
             <select onChange={filtering} ref={filterElement} className="py-2.5 inline px-0 w-[130px] text-sm text-gray-500 bg-transparent border-0 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
@@ -129,6 +155,8 @@ export const ProductsManagement = () => {
                 <option value='low' >ارزان ترین</option>
                 <option value='qty-high' >بیشترین تعداد</option>
                 <option value='qty-low' >کم ترین تعداد</option>
+                <option value='newer' >جدید ترین</option>
+                <option value='older' >قدیمی ترین</option>
                 <option value='inside' >ایرانی</option>
                 <option value='outside' >خارجی</option>
             </select>

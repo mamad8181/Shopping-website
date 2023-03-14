@@ -12,7 +12,7 @@ export const Header = () => {
   const [bagModal, setBagModal] = useState<boolean>(false)
 
   return (
-    <div className='bg-white pt-3 px-10 pb-3' >
+    <div className='relative bg-white pt-3 px-10 pb-3' >
       <img className='w-32 float-right bg-none ml-4' src={logo.src} alt='site logo' />
       <HeaderLabel/>
       <div className='relative' >

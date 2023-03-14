@@ -14,16 +14,18 @@ export const ProductDetails = ({productID}: myProps) => {
             // response.data.map((product: any) => product.id == productID && setProduct(product))
             setProduct([...response.data])
         }
+        console.log('aaaa')
         productsGetter()
     }, [])
 
-    console.log(product)
+    // console.log(product)
 
-    const productPrice: number = +product.price
+    // const productPrice: number = +product.price
     
     return(
-        <div className="flex p-[50px]">
-            <div >
+    <></>
+        // <div className="flex p-[50px]">
+            /* <div >
                 <p className="text-[35px] font-bold w-[35%]">
                     {product.category} {product.brand} <span className="text-[25px] float-left mt-[20px]" >{productPrice.toLocaleString()} تومان</span>
                 </p>
@@ -36,6 +38,6 @@ export const ProductDetails = ({productID}: myProps) => {
                     return <img className='max-h-[300px] max-w-[300px] shadow-xl m-auto' src={`${IMAGES_BASE_URL}${img}`} />
                 })}
             </div>
-        </div>
+        </div> */
     )
 }

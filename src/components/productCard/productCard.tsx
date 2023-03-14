@@ -19,7 +19,7 @@ export const ProductCard = ({product}: myProps) => {
     }
 
     return(
-        <div onClick={() => router.push(`/products/${product.id}`)} className='relative cursor-pointer w-full shadow-lg mt-[20px]' >
+        <div onClick={() => router.push(`/products/${product.id}`)} className='relative cursor-pointer rounded-[8px] w-full shadow-lg mt-[20px]' >
           <div>
             <img className='max-h-[300px] max-w-[300px] m-auto' src={`${IMAGES_BASE_URL}${product.images[0]}`} width='400' />
           </div>

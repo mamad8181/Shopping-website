@@ -49,7 +49,7 @@ export const HomeScreen = () => {
             {exampleProducts.map((product: any) => {
               const productPrice: number = +product.price
               return(
-                <div key={product.id} className='w-[25%] shadow-lg mt-[20px]' >
+                <div key={product.id} className='w-[25%] rounded-[8px] shadow-lg mt-[20px]' >
                   <div>
                     <img className='max-h-[300px] m-auto' src={`${IMAGES_BASE_URL}${product.images[0]}`}/>
                   </div>
