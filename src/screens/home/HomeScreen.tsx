@@ -63,16 +63,16 @@ export const HomeScreen = () => {
             {exampleProducts.map((product: any) => {
               const productPrice: number = +product.price
               return(
-                <div key={product.id} className='w-[25%] rounded-[8px] shadow-lg mt-[20px]' >
+                <div key={product.id} className='w-[25%] flex flex-col justify-between rounded-[8px] shadow-lg mt-[20px]' >
                   <div>
                     <img className='max-h-[300px] m-auto' src={`${IMAGES_BASE_URL}${product.images[0]}`}/>
                   </div>
                   <div className='text-center pb-[20px]'>
-                    <b className='block mb-[35px]'>{product.category} {product.brand}</b>
-                    <b className='block mb-[10px]'>{productPrice.toLocaleString()} تومان</b>
-                    <p>{product.model}</p><br/>
-                    <Button onClick={() => router.push(`/products/${product.id}`)} className='rounded-full py-[10px] px-[20px] pt-[6px] ml-[10px] bg-white text-black border border-black text-center' >مشاهده محصول</Button>
-                    <Button onClick={() => bagProductsAdder(product)} className='rounded-full  py-[10px] px-[20px] pt-[6px] bg-[#CE4545] text-white hover:bg-red-700' >افزودن به سبد خرید</Button>
+                      <b className='block mb-[35px]'>{product.category} {product.brand}</b>
+                      <b className='block mb-[10px]'>{productPrice.toLocaleString()} تومان</b>
+                      <p>{product.model}</p><br/>
+                      <Button onClick={() => router.push(`/products/${product.id}`)} className='rounded-full py-[10px] px-[20px] pt-[8px] ml-[10px] bg-white text-black border border-black text-center' >مشاهده محصول</Button>
+                      <Button onClick={() => bagProductsAdder(product)} className='rounded-full  py-[10px] px-[20px] pt-[8px] bg-[#CE4545] text-white hover:bg-red-700' >افزودن به سبد خرید</Button>
                   </div>
                 </div>
               )

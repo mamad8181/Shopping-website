@@ -19,7 +19,7 @@ export const ProductCard = ({product}: myProps) => {
     }
 
     return(
-        <div onClick={() => router.push(`/products/${product.id}`)} className='relative cursor-pointer rounded-[8px] w-full shadow-lg mt-[20px]' >
+        <div onClick={() => router.push(`/products/${product.id}`)} className='relative  flex flex-col justify-between cursor-pointer rounded-[8px] w-full shadow-lg mt-[20px]' >
           <div>
             <img className='max-h-[300px] max-w-[300px] m-auto' src={`${IMAGES_BASE_URL}${product.images[0]}`} width='400' />
           </div>
@@ -30,7 +30,7 @@ export const ProductCard = ({product}: myProps) => {
             <Button onClick={e => {
               e.stopPropagation()
               bagProductsAdder(product)
-              }} className='rounded-full py-[10px] px-[20px] pt-[6px] bg-[#CE4545] text-white hover:bg-red-700' >افزودن به سبد خرید</Button>
+              }} className='rounded-full py-[10px] px-[20px] pt-[8px] bg-[#CE4545] text-white hover:bg-red-700' >افزودن به سبد خرید</Button>
           </div>
         </div>
       )

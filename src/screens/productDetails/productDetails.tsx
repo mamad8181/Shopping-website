@@ -40,7 +40,7 @@ export const ProductDetails = ({productID}: myProps) => {
                 <Button onClick={e => {
                     e.stopPropagation()
                     // bagProductsAdder(product)
-                }} className='w-full rounded-full py-[10px] px-[20px] pt-[6px] bg-[#CE4545] text-white hover:bg-red-700' >افزودن به سبد خرید</Button>            </div>
+                }} className='w-full rounded-full py-[10px] px-[20px] pt-[8px] bg-[#CE4545] text-white hover:bg-red-700' >افزودن به سبد خرید</Button>            </div>
             <div className={product?.images.length == 1 ? `w-[65%]` : 'w-[65%] grid grid-cols-2 gap-[20px]'} >
                 {product?.images?.map((img: string) => {
                     return <img className='max-h-[435px] max-w-[100%] shadow-xl m-auto' src={`${IMAGES_BASE_URL}${img}`} />
