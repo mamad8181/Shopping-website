@@ -1,23 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: any = {bagCounter: 0, bagProducts: []}
-let newBag: any[] = []
+let temp: any
+const bagArray: any[]= []
+let tempCount: number= 0
 
-const cam = (bagProducts: any, newProduct: any) => {
-    newBag = []
-    if(!bagProducts.length){
+const cam = (newProduct: any) => {
+    console.log(newProduct)
+    if(!newProduct.inBag){
         newProduct["inBag"] = 1
-        newBag.push(newProduct)
+        temp = newProduct
     }
     else {
-        bagProducts.map((product: any) => newBag.push(product))
-        const found = newBag.find((product: any) => product.id == newProduct.id && product.inBag++)
-        if(!found){
-            newProduct["inBag"] = 1
-            newBag.push(newProduct)
-        }
+        newProduct.inBag++
     }
-    console.log(bagProducts)
 }
 
 const counterSlice = createSlice({
@@ -25,15 +21,13 @@ const counterSlice = createSlice({
     initialState: initialState,
     reducers: {
         increment(state, action){
-            console.log(state.bagProducts)
-            let tempCount: number= 0
-            cam(state.bagProducts, action.payload)
-            newBag.map((product: any) => {
-                state.bagProducts.push(product)
-                tempCount += product.inBag
-            })
+            const obj = action.payload
+            cam(obj)
+            bagArray.push(temp)
+            tempCount += temp.inBag
+            state.bagProducts = [...bagArray]
             state.bagCounter = tempCount
-            console.log(state.bagCounter)
+            console.log(state.bagProducts)
         }
     }
 })

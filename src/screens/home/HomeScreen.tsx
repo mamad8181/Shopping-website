@@ -26,7 +26,7 @@ export const HomeScreen = () => {
       products = [...response.data]
 
       for(let i: number= 0 ; tempProducts.length < 4 ; i++){
-        const randomproduct: any = products[Math.floor(Math.random() * products.length) - 1]
+        const randomproduct: any = products[Math.floor(Math.random() * products.length)]
         if(randomProductsArr.length == 0){
           tempProducts.push(randomproduct)
           randomProductsArr.push(randomproduct)
