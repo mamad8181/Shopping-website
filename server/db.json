@@ -20,8 +20,8 @@
       ],
       "description": "ایجاد ظاهری مات پوشانندگی بالا حاوی رنگدانه‌های غنی دارای بافت سبک ماندگاری بالا دارای طیف رنگی طبیعی مقاوم دربرابر آب حجم : ۳۵ میلی لیتر",
       "price": "219000",
-      "quantity": 7,
       "createdAt": 1646158398160,
+      "quantity": 7,
       "id": 1
     },
     {
@@ -98,11 +98,10 @@
       "quantity": 8
     },
     {
-      "id": 5,
       "region": "inside",
       "subcategory": "face",
-      "category": "کرم‌پودر",
-      "brand": "فلورما",
+      "category": "پودرفیکس",
+      "brand": "فلورمار",
       "model": "invisible",
       "images": [
         "6221483d8a494a39189fd23d6b86e987"
@@ -115,8 +114,8 @@
       ],
       "description": "بافت نرم و سبک, تثبیت کننده آرایش, کمک به افزایش ماندگاری میکاپ, مات کننده, محافظت از پوست در برابر اشعه یو وی, جلوه طبیعی, حفظ رطوبت پوست, موثر در نرمی و لطافت پوست, دارای رنگ‌های متنوع, حاوی روغن فندق ماكاداميا، روغن هوهوبه, دارای ويتامين‌های مكمل و امگا 6، 7 و 9, حجم: 18 گرم",
       "price": "420000",
-      "createdAt": 1646158398160,
-      "quantity": 8
+      "quantity": 9,
+      "id": 5
     },
     {
       "id": 6,
@@ -268,20 +267,22 @@
       "quantity": 8
     },
     {
-      "id": 14,
       "region": "inside",
       "subcategory": "face",
-      "category": "پالت‌هایلایتر",
+      "category": "هایلایتر",
       "brand": "گلدن رز",
       "model": "strobing",
       "images": [
         "57a045b7fdbb59dd3a956ed000e7a379"
       ],
-      "colors": [],
+      "colors": [
+        ""
+      ],
       "description": "پودری, درخشان کردن پوست, دارای بافت نرم و براق, قابل استفاده روی آرایش یا به تنهایی, ماندگاری و دوام بالا, جذب سریع, استفاده آسان, ظاهری زیبا و درخشان, دارای سه رنگ براق و اکلیلی, قابل استفاده به صورت خشک و مرطوب, دارای 3 رنگ صورتی، طلایی و قهوه ای, حجم 8.4 گرم",
       "price": "417000",
       "createdAt": 1646158398160,
-      "quantity": 8
+      "quantity": 8,
+      "id": 14
     },
     {
       "id": 15,
@@ -300,7 +301,6 @@
       "quantity": 8
     },
     {
-      "id": 16,
       "region": "inside",
       "subcategory": "face",
       "category": "کانتور",
@@ -310,27 +310,32 @@
         "8082da1bedcbebb9128b1ffe098724e3",
         "56252e2210939c43c45d582d6c03143b"
       ],
-      "colors": [],
+      "colors": [
+        ""
+      ],
       "description": "کانسیلر و کانتور در یک محصول, پوشانندگی بالا, ایجاد رنگ یکدست روی پوست , ماندگاری بالا, قابلیت پخش شدن اسان روی پوست, حجم بالا",
       "price": "40000",
       "createdAt": 1646158398160,
-      "quantity": 8
+      "quantity": 8,
+      "id": 16
     },
     {
-      "id": 17,
       "region": "inside",
       "subcategory": "face",
-      "category": "کانتور‌مدادی",
+      "category": "کانتور",
       "brand": "شون",
       "model": "multi stick",
       "images": [
         "c909572b2953742b468f7712542d65df"
       ],
-      "colors": [],
+      "colors": [
+        ""
+      ],
       "description": "بافت سبک, به صورت قلمی, ضدحساسیت, ایجاد سایه روشن طبیعی بر روی صورت, حاوی روغن کالاندولا, ضدالتهاب, آنتی‌باکتریال, محافظت از رطوبت پوست, ماندگاری بالا, تقویت کلاژن‌سازی پوست, تامین پروتئین ضروری برای درخشندگی پوست, دارای دو طیف تیره و روشن, بعدسازی و ایجاد حجم‌های متضاد, حجم 3.3 میل",
       "price": "139000",
       "createdAt": 1646158398160,
-      "quantity": 8
+      "quantity": 8,
+      "id": 17
     },
     {
       "id": 18,
@@ -401,20 +406,22 @@
       "quantity": 8
     },
     {
-      "id": 22,
       "region": "inside",
       "subcategory": "eye",
       "category": "خط‌چشم",
-      "brand": "فلورما",
+      "brand": "فلورمار",
       "model": "gel eyeliner",
       "images": [
         "1cd37790aeadbb08e0b6deab4604acca"
       ],
-      "colors": [],
+      "colors": [
+        ""
+      ],
       "description": "بافت ژله ای, حاوی رنگدانه های غلیظ و متراکم, ماندگاری طولانی مدت,  ایجاد خطوط صاف و یکنواخت, مغذی, برس مویی انعطاف پذیر, بدون ایجاد ماسیدگی و تکه تکه شدن",
       "price": "399000",
       "createdAt": 1646158398160,
-      "quantity": 8
+      "quantity": 8,
+      "id": 22
     },
     {
       "id": 23,
@@ -547,8 +554,7 @@
       ],
       "description": "بافت سب, نرم و روا, برا, پوشش دهی کام, پخش آسان روی ل, جلوه درخشان و زیب, بزرگتر نشان دادن لب‌ها به دلیل انعکاس نو, حاوی موم عس, ترمیم لب‌های آسیب دید, جلوگیری از خشکی ل, دارای طیف رنگی متناسب با هر سلیق, ماندگاری بال, استفاده آسا, رایحه دلپذی, فاقد پاراب, حجم 10 میل",
       "price": "122000",
-      "createdAt": 1646158398160,
-      "quantity": 7,
+      "quantity": 12,
       "id": 29
     },
     {
@@ -686,7 +692,7 @@
     {
       "region": "inside",
       "subcategory": "eyebrow",
-      "category": "ژل‌فیکساتورابرو",
+      "category": "ژل‌ابرو",
       "brand": "کالیستا",
       "model": "shapestyle",
       "images": [
@@ -1157,7 +1163,7 @@
     {
       "region": "outside",
       "subcategory": "eye",
-      "category": "پالت‌سایه",
+      "category": "سایه‌چشم",
       "brand": "هدی بیوتی",
       "model": "empowered",
       "images": [
@@ -1175,7 +1181,7 @@
     {
       "region": "outside",
       "subcategory": "eye",
-      "category": "پالت‌سایه",
+      "category": "سایه‌چشم",
       "brand": "توفیسد",
       "model": "natural nude",
       "images": [
@@ -1193,7 +1199,7 @@
     {
       "region": "outside",
       "subcategory": "eye",
-      "category": "پالت‌سایه",
+      "category": "سایه‌چشم",
       "brand": "هدی بیوتی",
       "model": "rose quartz",
       "images": [
@@ -1204,14 +1210,13 @@
       ],
       "description": "ماندگاری بالا , مقاوم در برابر محو شدن , بدون ریزش , فید راحت , پیگمنت بالا",
       "price": "5095000",
-      "createdAt": 1646158398160,
-      "quantity": 7,
+      "quantity": 8,
       "id": 63
     },
     {
       "region": "outside",
       "subcategory": "lips",
-      "category": "رژلب",
+      "category": "رژلب‌جامد",
       "brand": "دیور",
       "model": "rouge",
       "images": [
@@ -1233,7 +1238,7 @@
     {
       "region": "outside",
       "subcategory": "lips",
-      "category": "رژلب",
+      "category": "رژلب‌جامد",
       "brand": "ریر بیوتی",
       "model": "kinds words",
       "images": [
@@ -1461,7 +1466,7 @@
         }
       ],
       "prices": 10275000,
-      "delivered": "true",
+      "delivered": true,
       "createdAt": 1600000000000,
       "id": 1
     },
@@ -1481,7 +1486,7 @@
         }
       ],
       "prices": 10275000,
-      "delivered": "false",
+      "delivered": false,
       "createdAt": 1646158398160,
       "id": 2
     },
@@ -1501,7 +1506,7 @@
         }
       ],
       "prices": 10275000,
-      "delivered": "false",
+      "delivered": false,
       "createdAt": 1646158398160,
       "id": 3
     }

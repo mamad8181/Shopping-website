@@ -7,12 +7,13 @@ type props = {
   children: React.ReactNode,
   type? : any,
   onClick? : (event: any) => void,
-  loading? : boolean
+  loading? : boolean,
+  disabled? : any
 }
 
-export function Button ({ className, onClick, children, loading, type }: props) {
+export function Button ({ className, onClick, children, loading, type, disabled}: props) {
 
   return (
-    <button className={className} type={type} onClick={onClick} >{loading ? <Spinner size="sm" /> : children}</button>
+    <button className={className} disabled={disabled} type={type} onClick={onClick} >{loading ? <Spinner size="sm" /> : children}</button>
   )
 }

@@ -3,7 +3,7 @@ import { useRef, useState } from "react"
 import { Button } from "../Button/Button"
 import { Pagination } from "../pagination/pagination"
 
-export const AddProductModal = ({setAddModal}: any) => {
+export const AddProductModal = ({setAddModal, reRenderHandler}: any) => {
     const nameField = useRef<HTMLInputElement>(null)
     const subCategoryField = useRef<HTMLSelectElement>(null)
     const modelField = useRef<HTMLInputElement>(null)
@@ -41,8 +41,8 @@ export const AddProductModal = ({setAddModal}: any) => {
         else {
             const response = await postProduct(data)
             if(response.status == 201){
+                reRenderHandler()
                 setAddModal(false)
-                location.reload()
             }
         }
     }

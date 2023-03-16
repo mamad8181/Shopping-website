@@ -15,7 +15,7 @@ export const ProductCard = ({product}: myProps) => {
     const productPrice: number = +product.price
 
     const bagProductsAdder = (product: any) => {
-      dispatch(counterActions.increment(product))
+      dispatch(counterActions.addProduct(product))
     }
 
     return(

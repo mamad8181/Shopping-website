@@ -55,7 +55,7 @@ export const InfoProductModal= ({product, setInfoModal}: any) => {
                     </div>
                     <div className='w-[50%] pl-6'>
                     <p className='font-bold'>رنگ(ها):</p>
-                    {product.colors.length != 0 ? product.colors.map((color: string) => <p>{color}</p>) : <p className='text-zinc-500'>محصول بدون رنگ بندی می باشد!</p>}
+                    {product.colors[0] != '' ? product.colors.map((color: string) => <p>{color}</p>) : <p className='text-zinc-500'>محصول بدون رنگ بندی می باشد!</p>}
                     <p className='font-bold mt-[15px]'>توضیحات:</p>
                     <p className='mb-[15px]'>{product.description}</p>
                     <p className='font-bold mt-[15px]'>تاریخ اضافه شدن محصول:</p>

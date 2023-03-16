@@ -1,4 +1,5 @@
 import { getOrders } from "@/api"
+import { OrderModal } from "@/components";
 import moment from 'jalali-moment';
 import { useEffect, useRef, useState } from "react"
 import 'tailwindcss/tailwind.css'
@@ -8,6 +9,7 @@ type dataObj= Record<string, unknown>
 
 export const OrderManagement = () => {
   const [orders, setOrders] = useState<dataObj[]>([])
+  const [orderModal, setOrderModal] = useState(null)
   const selectElement = useRef<HTMLSelectElement>(null)
   const searchElement = useRef<HTMLInputElement>(null)
   const filterElement = useRef<HTMLSelectElement>(null)
@@ -125,25 +127,25 @@ export const OrderManagement = () => {
         </thead>
         <tbody>
             {(!ordersArray ? orders : ordersArray).map((order: any) => {
+                const orderPrices: number = +order.prices
                 const timestamp = order.createdAt;
                 const persianDate = moment(timestamp).format('jYYYY/jM/jD');
-
                 return(
                     <tr className="bg-white flex border-b h-[80px] dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={order.id}>
                         <th className="px-6 py-7 w-[40%] text-center font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {order.username} {order.lastname}
                         </th>
                         <td className="px-6 py-7 w-[20%] text-center font-semibold text-gray-900 dark:text-white">
-                            {order.prices} تومان
+                            {orderPrices.toLocaleString()} تومان
                         </td>
                         <td className="px-6 py-7 w-[20%] text-center">
                             {persianDate}
                         </td>
                         <td className="px-6 py-7 w-[10%] text-center">
-                            <p className="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer">بررسی</p>
+                            <p onClick={() => setOrderModal(order)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer">بررسی</p>
                         </td>
                         <td className="px-6 py-7 w-[10%] text-center">
-                            {order.delivered == 'true' ? <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-bookmark-check-fill text-green-500 text-center mr-[9px] mt-[5px]" viewBox="0 0 16 16">
+                            {order.delivered ? <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-bookmark-check-fill text-green-500 text-center mr-[9px] mt-[5px]" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm8.854-9.646a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
                             </svg> : <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-bookmark-dash-fill text-red-500 text-center mr-[9px] mt-[5px]" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zM6 6a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6z"/>
@@ -155,6 +157,7 @@ export const OrderManagement = () => {
         </tbody>
     </table>
             </div>
+            {orderModal && <OrderModal order={orderModal} setOrderModal={setOrderModal} />}
 </div>
    
   )

@@ -231,7 +231,7 @@ export const ProductsManagement = () => {
       {infoModal && <InfoProductModal setInfoModal={setInfoModal} product={infoModal} />}
       {edditModal && <EdditProductModal reRenderHandler={reRenderHandler} setEdditModal={setEdditModal} product={edditModal} />}
       {deleteModal && <DeleteProductModal reRenderHandler={reRenderHandler} setDeleteModal={setDeleteModal} product={deleteModal} />}
-      {addModal && <AddProductModal setAddModal={setAddModal} />}
+      {addModal && <AddProductModal setAddModal={setAddModal} reRenderHandler={reRenderHandler} />}
     </div>
   )
 }

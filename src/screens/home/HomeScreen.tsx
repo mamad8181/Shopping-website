@@ -37,7 +37,6 @@ export const HomeScreen = () => {
         }
         console.log(randomproduct.id)
       }
-      // console.log(tempProducts)
       setExampleProducts([...tempProducts])
     }
 
@@ -45,7 +44,7 @@ export const HomeScreen = () => {
   }, [])
 
   const bagProductsAdder = (product: any) => {
-    dispatch(counterActions.increment(product))
+    dispatch(counterActions.addProduct(product))
   }
 
 
