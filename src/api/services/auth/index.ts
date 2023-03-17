@@ -1,6 +1,6 @@
 import { INSTANCE } from '../../constants/index'
 
-export const adminLogin = (data: any) => {
+export const Login = (data: any) => {
   return INSTANCE.post('/auth/login', data)
 }
 

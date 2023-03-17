@@ -142,7 +142,7 @@ export const Bag = () => {
                             <p className="font-bold" >قیمت نهایی :</p>
                             <p className="font-bold" >{finalytotal != 0 ? finalytotal.toLocaleString() : subtotal.toLocaleString()}</p>
                         </div>      
-                        <Button className={`w-full rounded-xl py-[10px] px-[20px] pt-[8px] bg-[#CE4545] text-white hover:bg-red-700`}>ادامه فرایند خرید</Button>   
+                        <Button onClick={() => router.push('/login')} className={`w-full rounded-xl py-[10px] px-[20px] pt-[8px] bg-[#CE4545] text-white hover:bg-red-700`}>ادامه فرایند خرید</Button>   
                 </div>
             </div>
         </div>

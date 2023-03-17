@@ -7,14 +7,14 @@ import { toast } from 'react-toastify'
 import { Login } from '../../../api'
 import { useRouter } from 'next/router'
 
-const adminLoginSchema = yup
+const userLoginSchema = yup
   .object({
     username: yup.string().required(),
     password: yup.string().required()
   })
   .required()
 
-export const useAdminLogin = () => {
+export const useUserLogin = () => {
   const router = useRouter()
 
   const [loading, setLoading] = useState(false)
@@ -25,20 +25,20 @@ export const useAdminLogin = () => {
     getValues,
     formState: { errors }
   } = useForm({
-    resolver: yupResolver(adminLoginSchema),
+    resolver: yupResolver(userLoginSchema),
     mode: 'onChange'
   })
 
-  const adminLoginFormHandler = async (data: {username: string, password: string | number}) => {
+  const userLoginFormHandler = async (data: {username: string, password: string | number}) => {
     setLoading(true)
     try {
       const response = await Login(data)
       toast.success(response.data.message)
       localStorage.setItem(
-        'accessToken', response.data.accessToken
+        'userAccessToken', response.data.accessToken
       )
       localStorage.setItem(
-        'refreshToken', response.data.refreshToken
+        'userRefreshToken', response.data.refreshToken
       )
       setLoading(false)
       router.push('/management')
@@ -49,5 +49,5 @@ export const useAdminLogin = () => {
     }
   }
 
-  return { handleSubmit, adminLoginFormHandler, getValues, register, errors, loading }
+  return { handleSubmit, userLoginFormHandler, getValues, register, errors, loading }
 }

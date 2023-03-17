@@ -1523,6 +1523,12 @@
       "username": "admin",
       "password": "admin",
       "role": "admin"
+    },
+    {
+      "name": "Mohammad Sedarar",
+      "username": "mm81",
+      "password": "mm81",
+      "role": "user"
     }
   ],
   "protection": {
