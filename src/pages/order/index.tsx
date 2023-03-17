@@ -1,14 +1,14 @@
 import { Header } from "@/layouts"
-import { OrderPage, UserLoginScreen } from "@/screens"
+import {OrderScreen } from "@/screens"
 
 
-const orderPage = () => {
+const OrderPage = () => {
     return(
         <>
         <Header/>
-        <OrderPage/>
+        <OrderScreen/>
         </>
     )
 }
 
-export default orderPage
+export default OrderPage

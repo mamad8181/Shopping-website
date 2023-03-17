@@ -1,11 +1,13 @@
 import { postOrder, postProduct } from "@/api"
 import { Button } from "@/components"
+import { counterActions } from "@/store/productCounter"
 import { useRouter } from "next/router"
 import { useRef, useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 
-export const OrderPage = () => {
+export const OrderScreen = () => {
+    const dispatch = useDispatch()
     const router = useRouter()
     const [errorState, setErrorState] = useState<boolean>(false)
     const username = useRef<HTMLInputElement>(null)
@@ -33,11 +35,8 @@ export const OrderPage = () => {
 
         if(errorFlag == true) setErrorState(true)
         else {
-            const response = await postOrder(data)
-            if(response.status == 201){
-                // location.reload()
-                router.push('/')
-            }
+            dispatch(counterActions.orderSetter(data))
+            router.push('/payment')
         }
     }
 
