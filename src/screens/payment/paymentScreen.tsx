@@ -1,10 +1,12 @@
 import { postOrder } from '@/api'
-import { Button } from '@/components'
+import { Button, SucssesPayment } from '@/components'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import paymentImg from '../../assets/images/payment.png'
 
 export const PaymentScreen = () => {
+    const [sucssesModal, setSucssesModal] = useState<boolean>(false)
     const subtotal = useSelector((state: any) => state.counter.subtotal)
     const data = useSelector((state: any) => state.counter.order)
     const router = useRouter()
@@ -12,7 +14,7 @@ export const PaymentScreen = () => {
     const orderPoster = async () => {
         const response = await postOrder(data)
         if(response.status == 201){
-            
+            setSucssesModal(true)
         }
     }
 
@@ -25,6 +27,7 @@ export const PaymentScreen = () => {
                 <p className="font-bold" >مبلغ قابل پرداخت:</p>
                 <p className="font-bold">{subtotal.toLocaleString()} تومان</p>
             </div>
+            {sucssesModal && <SucssesPayment/>}
         </div>
     )
 }
