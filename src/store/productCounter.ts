@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState: any = {bagCounter: 0, bagProducts: []}
+const initialState: any = {bagCounter: 0, subtotal: 0, bagProducts: []}
 let temp: any={}
 const bagArray: any[]= []
 let tempCount: number= 0
@@ -57,6 +57,9 @@ const counterSlice = createSlice({
             removeOneHandler(action.payload)
             state.bagProducts = [...bagArray]
             state.bagCounter = tempCount
+        },
+        subtotalHandler(state, action){
+            state.subtotal = action.payload
         }
     }
 })

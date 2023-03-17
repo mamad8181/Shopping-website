@@ -12,6 +12,10 @@ export const postProduct = (data: any) => {
   return INSTANCE.post('/products', data)
 }
 
+export const postOrder = (data: any) => {
+  return INSTANCE.post('/orders', data)
+}
+
 export const deleteProduct = (id: any, config: any) => {
   return INSTANCE.delete(`/products/${id}`, config)
 }
