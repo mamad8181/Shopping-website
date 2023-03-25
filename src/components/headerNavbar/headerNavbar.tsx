@@ -40,12 +40,15 @@ export const HeaderNavbar = ({subCategory, setShowNavbar}: myProps) => {
     products?.filter((product: any) => product.subcategory == productSubCategory && !filteredCategories.includes(product.category) && filteredCategories.push(product.category))
 
     return (
-        <div className="relative " onMouseLeave={() => setShowNavbar(null)} >
-            <ul className="flex justify-between w-3/5 m-auto py-[10px] px-[50px]">
-                {filteredCategories.map((route: any) => <li className="cursor-pointer font-bold">
+        <>
+            {filteredCategories.length != 0 && <div className="absolute top-[100px] right-0 z-[1] w-full bg-white" onMouseLeave={() => setShowNavbar(null)} >
+                <ul className="flex justify-between w-3/5 m-auto py-[10px] px-[50px]">
+                    {filteredCategories.map((route: any) => <li className="cursor-pointer font-bold">
                     <Link href={`/products/${productSubCategory}/${route}`}>{route}</Link>
-                </li>)}
-            </ul>
-        </div>
+                    </li>)}
+                </ul>
+            </div>}
+        </>
+        
     )
 }
